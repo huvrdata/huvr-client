@@ -10,5 +10,5 @@ To use HUVR Client in a project::
     client.login(username="user1", password="111111")
 
 
-The examples folder includes a detailed script that pulls all the data for a set
+The examples https://github.com/huvrdata/huvr-client folder includes a detailed script that pulls all the data for a set
 of projects.

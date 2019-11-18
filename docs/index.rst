@@ -1,5 +1,5 @@
-Welcome to HUVR API Client's documentation!
-======================================
+Welcome to HUVR Client's documentation!
+=======================================
 
 .. toctree::
    :maxdepth: 2

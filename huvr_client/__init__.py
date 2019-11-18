@@ -10,5 +10,5 @@ from .__version__ import __copyright__  # noqa
 from .huvr_client import Client
 
 __all__ = [
-    Client,
+    "Client",
 ]
