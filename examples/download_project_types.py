@@ -16,7 +16,7 @@ if __name__ == '__main__':
     username = ""
     password = ""
 
-    base_directory = make_base_directory(os.getcwd(), "huvrdatacloud", "defects")
+    base_directory = make_base_directory(os.getcwd(), "huvrdatacloud", "example2")
 
     # Login and go
     client = Client(url=url, verbose=True)

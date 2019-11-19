@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     download_csv = True # use false to JSON
 
-    base_directory = make_base_directory(os.getcwd(), "huvrdatacloud", "example2")
+    base_directory = make_base_directory(os.getcwd(), "huvrdatacloud", "defects")
     debug_prints = False
     fetch_defects = True
     fetch_projects_metadata = True
