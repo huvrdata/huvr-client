@@ -18,6 +18,9 @@ if __name__ == '__main__':
 
     base_directory = make_base_directory(os.getcwd(), "huvrdatacloud", "defects")
 
+    # Login and go
+    client = Client(url=url, verbose=True)
+    client.login(username, password)
 
     #  .--------------------.
     # |  GET Project Types   |
