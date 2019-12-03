@@ -24,7 +24,7 @@ def write_csv_file(filename, data):
 
 
 def write_json_file(filename, data):
-    with open(filename, "wb") as outfile:
+    with open(filename, "w") as outfile:
         outfile.write(json.dumps(data, indent=4))
 
 
@@ -37,7 +37,7 @@ def save_profile_to_file(profile, working_directory):
     filename = sanitize_name(filename)
     filename = "profile_" + filename + ".json"
     filename = "{}/{}".format(working_directory, filename)
-    with open(filename, "wb") as outfile:
+    with open(filename, "w") as outfile:
         tmp_json = {}
         tmp_json["settings"] = profile["results"]["settings"]
         outfile.write(json.dumps(tmp_json, indent=4))
@@ -48,7 +48,7 @@ def save_checklist_to_file(checklists, working_directory):
     filename = sanitize_name(filename)
     filename = "checklist_" + filename + ".json"
     filename = "{}/{}".format(working_directory, filename)
-    with open(filename, "wb") as outfile:
+    with open(filename, "w") as outfile:
         tmp_json = checklists["json"]
         if "archived" in tmp_json:
             del tmp_json["archived"]
@@ -60,5 +60,5 @@ def save_project_type_to_file(project_type, working_directory):
     filename = sanitize_name(filename)
     filename = "project_type_" + filename + ".json"
     filename = "{}/{}".format(working_directory, filename)
-    with open(filename, "wb") as outfile:
+    with open(filename, "w") as outfile:
         outfile.write(json.dumps(project_type, indent=4))

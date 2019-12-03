@@ -101,7 +101,7 @@ if __name__ == '__main__':
                                 print(u"lines overall = {}".format(len(final_defects_csv.split('\n'))))
                                 print(u"lines defects = {}".format(len(defects.split('\n'))))
                             else:
-                                final_defects += defects['defects']
+                                final_defects.append(defects['defects'])
                     else:
                         print("{} {}".format(res_code_defects, defects))
 
@@ -120,7 +120,7 @@ if __name__ == '__main__':
                             print(u"lines overall = {}".format(len(final_projects_csv.split('\n'))))
                             print(u"lines projects = {}".format(len(projects_meta.split('\n'))))
                         else:
-                            final_projects_meta += projects_meta
+                            final_projects_meta.append(projects_meta)
 
                     else:
                         print("{} {}".format(res_code_pmeta, projects_meta))
@@ -156,7 +156,7 @@ if __name__ == '__main__':
                                 print(u"lines overall = {}".format(len(final_checklist_csv.split('\n'))))
                                 print(u"lines checklists = {}".format(len(checklist_meta.split('\n'))))
                             else:
-                                final_checklist_meta += checklist_meta
+                                final_checklist_meta.append(checklist_meta)
 
             if fetch_defects:
                 # ------------- F e t c h    D e f e c t s    S u m m a r y ----------
