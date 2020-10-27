@@ -40,6 +40,22 @@ class Client(object):
             exit()
         print("huvr_client: Logged {} in to {}".format(username, self.base_url))
 
+    def post(self, url, data):
+        """ Override the requests.post handler so that we can dynamically enable
+        logging, with our verbose flag. """
+
+        headers = {
+            'User-Agent': 'huvr-api-client/{}'.format('0.1.0'),  # python-requests/2.22.0
+        }
+
+        if self.verbose:
+            print("huvr_api_client: POSTING {}".format(url))
+            print(json.dumps(data, indent=4))
+        response = self.client.post(url, json=data, headers=headers)
+        if self.verbose:
+            print("huvr_api_client: {} {}".format(response.request.method, response.url))
+        return response
+
     def get(self, url, params=None):
         """
         Override the requests.get handler so that we can dynamically enable
@@ -95,6 +111,105 @@ class Client(object):
             return (200, response.json())
         else:
             return (response.status_code, json.loads(response.text))
+
+    def set_checklist(self, project_id, checklist_id):
+        """ 
+        given a project ID and a checklist ID, set the checklist
+        POST /api/checklist/set
+        """
+        url = "{}/api/checklist/set/{}/{}".format(self.base_url, project_id, checklist_id)
+        
+        response = self.post(url, {})
+        if response.status_code == 200:
+            return (200, response)
+        else:
+            return (response.status_code, response.text)
+
+    def set_profile(self, project_id, profile_id):
+        """ 
+        given a project ID and a profile ID, set the profile
+        POST /api/profile/set
+        """
+        url = "{}/api/profile/set/{}/{}".format(self.base_url, project_id, profile_id)
+        
+        response = self.post(url, {})
+        if response.status_code == 200:
+            return (200, response)
+        else:
+            return (response.status_code, response.text)
+
+    def project(self, data):
+        """ Get profiles
+        POST /api/projects
+        """
+        url = "{}/api/projects".format(self.base_url)
+
+        response = self.post(url, data)
+        if response.status_code == 201:
+            return (201, response.json())
+        else:
+            return (response.status_code, response.text)
+
+    def upload_project_media(self, upload_project_id):
+        """
+        PUT /api/projects/<project_id>/media
+        """
+
+        media_directory = '/data-dir/site/project/media-h2'
+        if not os.path.exists(media_directory):
+            print("Project directory does not exist [{}]".format( media_directory ))
+            exit()
+
+        media_files = os.listdir(media_directory)
+        session = self.client  # grab pre-authenticated session. our file post headers are unique
+        # lets don't upload images to projects twice.
+        url = self.base_url + "/api/projects/{}/media".format(upload_project_id)
+        print("GET: [{}]".format(url))
+        response = session.request("GET", url, data="", headers={})
+        images_already_uploaded=False
+        if response.status_code == 200:
+            rjson = response.json()
+            if rjson:
+                if rjson['count'] > 0:
+                    images_already_uploaded=True
+
+        if images_already_uploaded:
+            print("Looks like we have already uploaded media for {}: {}".format(proj.key.id(), proj.title))
+        else:
+            cnt = 0
+            for image in media_files:
+
+                print(image)
+                timestamp_mseconds = int((datetime.datetime.now() - datetime.datetime.utcfromtimestamp(0)).total_seconds() * 1000)
+                
+                # call get to the blob interface to prep for file upload
+                url = self.base_url + "/api/blob/url?{}".format(timestamp_mseconds) 
+                print("GET: [{}]".format(url))
+                response = session.request("GET", url, data="", headers={})
+
+                if response.status_code == 200:
+                    rjson = response.json()
+                    if rjson:
+                        print("Success")
+                        if self.verbose:
+                            print(json.dumps(rjson, indent=4))
+                            print("random [{}] url [{}]".format(rjson['random'], rjson['url']))
+                        image_filename = "%s/%s" % ( media_directory, image)
+                        mime = magic.Magic(mime=True)
+                        # https://stackoverflow.com/a/35974071/1184492
+                        files = {'upload': (image, open(image_filename,'rb'), mime.from_file(image_filename))}
+                        values = {'project': upload_project_id, 'name':'file', 'filename':image}
+
+                        headers = {
+                            'Content-Type': mime.from_file(image_filename)
+                        }
+                      
+                        response = session.request("POST", rjson['url'], files=files, data=values)
+                        if response.status_code == 200:
+                            print("File Upload Success")
+                        else:
+                            print(response.status_code)
+                            print(response.reason)
 
     def profiles_name_lookup(self, profile_name):
         """ This wraps the project_types query and search'es for a name string """
