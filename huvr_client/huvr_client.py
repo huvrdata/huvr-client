@@ -8,7 +8,7 @@ import requests
 
 from .__version__ import __version__ as VERSION
 import datetime
-import magic
+import mimetypes
 
 
 class Client(object):
@@ -198,9 +198,9 @@ class Client(object):
                 if self.verbose:
                     print(json.dumps(rjson, indent=4))
                     print("random [{}] url [{}]".format(rjson['random'], rjson['url']))
-                mime = magic.Magic(mime=True)
+                mimetypes.init()
                 # https://stackoverflow.com/a/35974071/1184492
-                files = {'upload': (filename, open(filename, 'rb'), mime.from_file(filename))}
+                files = {'upload': (filename, open(filename, 'rb'), mimetypes.read(filename))}
                 values = {'project': project_id, 'name': 'file', 'filename': filename}
 
                 response = session.request("POST", rjson['url'], files=files, data=values)
