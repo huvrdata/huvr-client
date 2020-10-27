@@ -9,7 +9,7 @@ import requests
 from .__version__ import __version__ as VERSION
 import datetime
 import mimetypes
-
+import pathlib
 
 class Client(object):
     """ Client object is a simple wrapper around a requests Session. """
@@ -200,7 +200,8 @@ class Client(object):
                     print("random [{}] url [{}]".format(rjson['random'], rjson['url']))
                 mimetypes.init()
                 # https://stackoverflow.com/a/35974071/1184492
-                files = {'upload': (filename, open(filename, 'rb'), mimetypes.read(filename))}
+                mtype, encoding = mimetypes.guess_type(filename)
+                files = {'upload': (pathlib.Path(filename).name, open(filename, 'rb'), mtype)}
                 values = {'project': project_id, 'name': 'file', 'filename': filename}
 
                 response = session.request("POST", rjson['url'], files=files, data=values)
