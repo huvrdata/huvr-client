@@ -210,6 +210,7 @@ class Client(object):
                     print(response.status_code)
                     print(response.reason)
                 return (response.status_code, response.text)
+        return (response.status_code, response.text)
 
     def profiles_name_lookup(self, profile_name):
         """ This wraps the project_types query and search'es for a name string """
