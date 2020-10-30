@@ -165,10 +165,9 @@ class Client(object):
         DELETE /api/projects/<id>
         """
         url = "{}/api/projects/{}".format(self.base_url, id)
-        response = requests.delete(url)
+        response = self.client.delete(url)
 
         return response
-
 
     def get_projects(self, id=None):
         """ Get projects
@@ -181,10 +180,7 @@ class Client(object):
             url = "{}/{}".format(url, id)
 
         response = self.get(url)
-        if response.status_code == 200:
-            return (200, response.json())
-        else:
-            return response
+        return response
 
     def project_media(self, id=None):
         """ Get project media
