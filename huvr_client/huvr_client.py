@@ -160,6 +160,28 @@ class Client(object):
         else:
             return (response.status_code, response.text)
 
+    def delete_project(self, id):
+        """
+        DELETE /api/projects/<id>
+        """
+        url = "{}/api/projects/{}".format(self.base_url, id)
+        response = self.client.delete(url)
+
+        return response
+
+    def get_projects(self, id=None):
+        """ Get projects
+        GET /api/projects
+        GET /api/projects/<project_id>
+        """
+        url = "{}/api/projects".format(self.base_url)
+
+        if id:
+            url = "{}/{}".format(url, id)
+
+        response = self.get(url)
+        return response
+
     def project_media(self, id=None):
         """ Get project media
         GET /api/projects/<id>/media
