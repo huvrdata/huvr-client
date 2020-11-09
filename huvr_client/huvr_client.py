@@ -11,6 +11,7 @@ import datetime
 import mimetypes
 import pathlib
 
+
 class Client(object):
     """ Client object is a simple wrapper around a requests Session. """
 
@@ -47,7 +48,9 @@ class Client(object):
         logging, with our verbose flag. """
 
         headers = {
-            'User-Agent': 'huvr-api-client/{}'.format('0.1.0'),  # python-requests/2.22.0
+            "User-Agent": "huvr-api-client/{}".format(
+                "0.1.0"
+            ),  # python-requests/2.22.0
         }
 
         if self.verbose:
@@ -55,7 +58,9 @@ class Client(object):
             print(json.dumps(data, indent=4))
         response = self.client.post(url, json=data, headers=headers)
         if self.verbose:
-            print("huvr_api_client: {} {}".format(response.request.method, response.url))
+            print(
+                "huvr_api_client: {} {}".format(response.request.method, response.url)
+            )
         return response
 
     def get(self, url, params=None):
@@ -119,7 +124,9 @@ class Client(object):
         given a project ID and a checklist ID, set the checklist
         POST /api/checklist/set
         """
-        url = "{}/api/checklist/set/{}/{}".format(self.base_url, project_id, checklist_id)
+        url = "{}/api/checklist/set/{}/{}".format(
+            self.base_url, project_id, checklist_id
+        )
 
         response = self.post(url, {})
         if response.status_code == 200:
@@ -204,29 +211,43 @@ class Client(object):
         POST /_ah/<url_from_gcs_webapp2>
         """
 
-        session = self.client  # grab pre-authenticated session. our file post headers are unique
+        session = (
+            self.client
+        )  # grab pre-authenticated session. our file post headers are unique
 
-        timestamp_mseconds = int((datetime.datetime.now() - datetime.datetime.utcfromtimestamp(0)).total_seconds() * 1000)
+        timestamp_mseconds = int(
+            (
+                datetime.datetime.now() - datetime.datetime.utcfromtimestamp(0)
+            ).total_seconds()
+            * 1000
+        )
 
         # call get to the blob interface to prep for file upload
         url = self.base_url + "/api/blob/url?{}".format(timestamp_mseconds)
-        print("GET: [{}]".format(url))
+        if self.verbose:
+            print("GET: [{}]".format(url))
         response = session.request("GET", url, data="", headers={})
 
         if response.status_code == 200:
             rjson = response.json()
             if rjson:
-                print("Successful fetch of image upload url: {}".format(rjson['url']))
                 if self.verbose:
+                    print(
+                        "Successful fetch of image upload url: {}".format(rjson["url"])
+                    )
                     print(json.dumps(rjson, indent=4))
-                    print("random [{}] url [{}]".format(rjson['random'], rjson['url']))
+                    print("random [{}] url [{}]".format(rjson["random"], rjson["url"]))
                 mimetypes.init()
                 # https://stackoverflow.com/a/35974071/1184492
                 mtype, encoding = mimetypes.guess_type(filename)
-                files = {'upload': (pathlib.Path(filename).name, open(filename, 'rb'), mtype)}
-                values = {'project': project_id, 'name': 'file', 'filename': filename}
+                files = {
+                    "upload": (pathlib.Path(filename).name, open(filename, "rb"), mtype)
+                }
+                values = {"project": project_id, "name": "file", "filename": filename}
 
-                response = session.request("POST", rjson['url'], files=files, data=values)
+                response = session.request(
+                    "POST", rjson["url"], files=files, data=values
+                )
                 if response.status_code == 200:
                     print("File Upload Success")
                 else:
