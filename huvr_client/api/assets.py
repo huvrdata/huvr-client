@@ -6,15 +6,10 @@ from .base_api_module import BaseApiModule
 
 
 class AssetsApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         Returns an array of assets.
-        
+
         :param dict params: app_key: string
         asset_condition: string
         asset_condition__in: string
@@ -49,7 +44,7 @@ class AssetsApiModule(BaseApiModule):
         type: string
         type__name: string
         updated_on: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -69,7 +64,7 @@ class AssetsApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_assets_list
         """
         return self.client.request(
@@ -78,19 +73,15 @@ class AssetsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         accept a flat object for create, return nested detail object
-        
+
         :param dict json: $ref: '#/components/schemas/AssetCreate'
-        
+
         :returns: $ref: '#/components/schemas/AssetDetail'
-        
+
         https://docs.huvrdata.app/reference/api_assets_create
         """
         return self.client.request(
@@ -99,16 +90,12 @@ class AssetsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def asset_condition_map(
-        self,
-        params=None,
-        **kwargs
-    ):
+
+    def asset_condition_map(self, params=None, **kwargs):
         """
         Asset endpoint
-        
-        
+
+
         :param dict params: app_key: string
         asset_condition: string
         asset_condition__in: string
@@ -143,11 +130,11 @@ class AssetsApiModule(BaseApiModule):
         type: string
         type__name: string
         updated_on: string
-        
+
         :returns: items:
           $ref: '#/components/schemas/AssetConditionMap'
         type: array
-        
+
         https://docs.huvrdata.app/reference/api_assets_asset_condition_map
         """
         return self.client.request(
@@ -156,15 +143,11 @@ class AssetsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def filters(
-        self,
-        params=None,
-        **kwargs
-    ):
+
+    def filters(self, params=None, **kwargs):
         """
         No query parameters are supported on this endpoint.
-        
+
         :param dict params: app_key: string
         asset_condition: string
         asset_condition__in: string
@@ -199,9 +182,9 @@ class AssetsApiModule(BaseApiModule):
         type: string
         type__name: string
         updated_on: string
-        
+
         :returns: $ref: '#/components/schemas/AssetFilter'
-        
+
         https://docs.huvrdata.app/reference/api_assets_filters
         """
         return self.client.request(
@@ -210,16 +193,12 @@ class AssetsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def tree(
-        self,
-        params=None,
-        **kwargs
-    ):
+
+    def tree(self, params=None, **kwargs):
         """
         Asset endpoint
-        
-        
+
+
         :param dict params: app_key: string
         asset_condition: string
         asset_condition__in: string
@@ -254,7 +233,7 @@ class AssetsApiModule(BaseApiModule):
         type: string
         type__name: string
         updated_on: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -274,7 +253,7 @@ class AssetsApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_assets_tree
         """
         return self.client.request(
@@ -283,18 +262,14 @@ class AssetsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific asset
         :params id asset ID
-        
+
         :returns: $ref: '#/components/schemas/AssetDetail'
-        
+
         https://docs.huvrdata.app/reference/api_assets_read
         """
         return self.client.request(
@@ -302,20 +277,15 @@ class AssetsApiModule(BaseApiModule):
             path=f"/api/assets/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         Asset update. Asset type and asset path are ignored on updates
-        
+
         :param dict json: $ref: '#/components/requestBodies/AssetUpdate'
-        
+
         :returns: $ref: '#/components/schemas/AssetDetail'
-        
+
         https://docs.huvrdata.app/reference/api_assets_update
         """
         return self.client.request(
@@ -324,21 +294,16 @@ class AssetsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         Asset endpoint
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/AssetUpdate'
-        
+
         :returns: $ref: '#/components/schemas/AssetUpdate'
-        
+
         https://docs.huvrdata.app/reference/api_assets_partial_update
         """
         return self.client.request(
@@ -347,15 +312,11 @@ class AssetsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete(self, id, **kwargs):
         """
         Asset endpoint
-        
+
         https://docs.huvrdata.app/reference/api_assets_delete
         """
         return self.client.request(
@@ -363,4 +324,3 @@ class AssetsApiModule(BaseApiModule):
             path=f"/api/assets/{id}/",
             **kwargs,
         )
-    

@@ -6,12 +6,7 @@ from .base_api_module import BaseApiModule
 
 
 class CmlsApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         :param dict params: access_display: string
         app_key: string
@@ -32,7 +27,7 @@ class CmlsApiModule(BaseApiModule):
         ordering: string
         search: string
         type: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -52,7 +47,7 @@ class CmlsApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_cmls_list
         """
         return self.client.request(
@@ -61,19 +56,15 @@ class CmlsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         create CML
-        
+
         :param dict json: $ref: '#/components/requestBodies/CMLCreate'
-        
+
         :returns: $ref: '#/components/schemas/CML'
-        
+
         https://docs.huvrdata.app/reference/api_cmls_create
         """
         return self.client.request(
@@ -82,15 +73,11 @@ class CmlsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         :returns: $ref: '#/components/schemas/CML'
-        
+
         https://docs.huvrdata.app/reference/api_cmls_read
         """
         return self.client.request(
@@ -98,18 +85,13 @@ class CmlsApiModule(BaseApiModule):
             path=f"/api/cmls/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         :param dict json: $ref: '#/components/requestBodies/CMLCreate'
-        
+
         :returns: $ref: '#/components/schemas/CML'
-        
+
         https://docs.huvrdata.app/reference/api_cmls_update
         """
         return self.client.request(
@@ -118,18 +100,13 @@ class CmlsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         :param dict json: $ref: '#/components/requestBodies/CMLCreate'
-        
+
         :returns: $ref: '#/components/schemas/CMLCreate'
-        
+
         https://docs.huvrdata.app/reference/api_cmls_partial_update
         """
         return self.client.request(
@@ -138,12 +115,8 @@ class CmlsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete(self, id, **kwargs):
         """
         https://docs.huvrdata.app/reference/api_cmls_delete
         """
@@ -152,4 +125,3 @@ class CmlsApiModule(BaseApiModule):
             path=f"/api/cmls/{id}/",
             **kwargs,
         )
-    

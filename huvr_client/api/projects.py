@@ -6,15 +6,10 @@ from .base_api_module import BaseApiModule
 
 
 class ProjectsApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         Returns an array projects.
-        
+
         :param dict params: asset: string
         asset__asset_path_cache__path: string
         asset__type__in: string
@@ -48,7 +43,7 @@ class ProjectsApiModule(BaseApiModule):
         type__name: string
         updated_on: string
         work_done_on: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -68,7 +63,7 @@ class ProjectsApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_projects_list
         """
         return self.client.request(
@@ -77,19 +72,15 @@ class ProjectsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         accept a flat object for create, return nested detail object
-        
+
         :param dict json: $ref: '#/components/requestBodies/ProjectCreate'
-        
+
         :returns: $ref: '#/components/schemas/ProjectDetail'
-        
+
         https://docs.huvrdata.app/reference/api_projects_create
         """
         return self.client.request(
@@ -98,18 +89,14 @@ class ProjectsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def delete(self, json=None, **kwargs):
         """
         View projects
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/ProjectDetail'
-        
+
         https://docs.huvrdata.app/reference/api_projects_delete
         """
         return self.client.request(
@@ -118,18 +105,14 @@ class ProjectsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def edit(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def edit(self, json=None, **kwargs):
         """
         View projects
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/ProjectDetail'
-        
+
         https://docs.huvrdata.app/reference/api_projects_edit
         """
         return self.client.request(
@@ -138,19 +121,15 @@ class ProjectsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def bulk_share(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def bulk_share(self, json=None, **kwargs):
         """
         allow for bulk assignment/unassignment of multiple users to multiple projects
-        
+
         :param dict json: $ref: '#/components/schemas/ProjectBulkShare'
-        
+
         :returns: $ref: '#/components/schemas/ProjectListDetailed'
-        
+
         https://docs.huvrdata.app/reference/api_projects_bulk_share
         """
         return self.client.request(
@@ -159,16 +138,12 @@ class ProjectsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def counts_by_status(
-        self,
-        params=None,
-        **kwargs
-    ):
+
+    def counts_by_status(self, params=None, **kwargs):
         """
         View projects
-        
-        
+
+
         :param dict params: asset: string
         asset__asset_path_cache__path: string
         asset__type__in: string
@@ -202,9 +177,9 @@ class ProjectsApiModule(BaseApiModule):
         type__name: string
         updated_on: string
         work_done_on: string
-        
+
         :returns: $ref: '#/components/schemas/ProjectCountsByStatus'
-        
+
         https://docs.huvrdata.app/reference/api_projects_counts_by_status
         """
         return self.client.request(
@@ -213,15 +188,11 @@ class ProjectsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def list_detailed(
-        self,
-        params=None,
-        **kwargs
-    ):
+
+    def list_detailed(self, params=None, **kwargs):
         """
         Shows a detailed list or projects (slow).
-        
+
         :param dict params: asset: string
         asset__asset_path_cache__path: string
         asset__type__in: string
@@ -255,7 +226,7 @@ class ProjectsApiModule(BaseApiModule):
         type__name: string
         updated_on: string
         work_done_on: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -275,7 +246,7 @@ class ProjectsApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_projects_list_detailed
         """
         return self.client.request(
@@ -284,18 +255,14 @@ class ProjectsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific project
         :params id Project ID
-        
+
         :returns: $ref: '#/components/schemas/ProjectDetail'
-        
+
         https://docs.huvrdata.app/reference/api_projects_read
         """
         return self.client.request(
@@ -303,20 +270,15 @@ class ProjectsApiModule(BaseApiModule):
             path=f"/api/projects/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         Project update. work_done_on is ignored if 'historical_project' is true
-        
+
         :param dict json: $ref: '#/components/requestBodies/ProjectCreate'
-        
+
         :returns: $ref: '#/components/schemas/ProjectDetail'
-        
+
         https://docs.huvrdata.app/reference/api_projects_update
         """
         return self.client.request(
@@ -325,21 +287,16 @@ class ProjectsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         View projects
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/ProjectCreate'
-        
+
         :returns: $ref: '#/components/schemas/ProjectCreate'
-        
+
         https://docs.huvrdata.app/reference/api_projects_partial_update
         """
         return self.client.request(
@@ -348,15 +305,11 @@ class ProjectsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete_alt(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete_alt(self, id, **kwargs):
         """
         View projects
-        
+
         https://docs.huvrdata.app/reference/api_projects_delete_alt
         """
         return self.client.request(
@@ -364,19 +317,15 @@ class ProjectsApiModule(BaseApiModule):
             path=f"/api/projects/{id}/",
             **kwargs,
         )
-    
-    def asset_condition_read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def asset_condition_read(self, id, **kwargs):
         """
         Set the project asset condition, allow retrival of the project asset condition history
-        
+
         :returns: items:
           $ref: '#/components/schemas/AssetConditionHistoryInline'
         type: array
-        
+
         https://docs.huvrdata.app/reference/api_projects_asset-condition_read
         """
         return self.client.request(
@@ -384,20 +333,15 @@ class ProjectsApiModule(BaseApiModule):
             path=f"/api/projects/{id}/asset-condition/",
             **kwargs,
         )
-    
-    def asset_condition_create(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def asset_condition_create(self, id, json=None, **kwargs):
         """
         Set the project asset condition, allow retrival of the project asset condition history
-        
+
         :param dict json: $ref: '#/components/schemas/AssetConditionChange'
-        
+
         :returns: $ref: '#/components/schemas/AssetConditionHistoryInline'
-        
+
         https://docs.huvrdata.app/reference/api_projects_asset-condition_create
         """
         return self.client.request(
@@ -406,20 +350,15 @@ class ProjectsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def asset_condition_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def asset_condition_update(self, id, json=None, **kwargs):
         """
         Set the project asset condition, allow retrival of the project asset condition history
-        
+
         :param dict json: $ref: '#/components/requestBodies/ProjectDetail'
-        
+
         :returns: $ref: '#/components/schemas/ProjectDetail'
-        
+
         https://docs.huvrdata.app/reference/api_projects_asset-condition_update
         """
         return self.client.request(
@@ -428,17 +367,13 @@ class ProjectsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def export(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def export(self, id, **kwargs):
         """
         Exports existing project in excel format.
         This is a simple helper API endpoint that is run by developers only
         as this process will probably (depending on data) outgrow an inline request.
-        
+
         https://docs.huvrdata.app/reference/api_projects_export
         """
         return self.client.request(
@@ -446,17 +381,13 @@ class ProjectsApiModule(BaseApiModule):
             path=f"/api/projects/{id}/export/",
             **kwargs,
         )
-    
-    def location_summary(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def location_summary(self, id, **kwargs):
         """
         Location summary of the findings/defects for a given project
-        
+
         :returns: $ref: '#/components/schemas/ProjectDetail'
-        
+
         https://docs.huvrdata.app/reference/api_projects_location_summary
         """
         return self.client.request(
@@ -464,19 +395,15 @@ class ProjectsApiModule(BaseApiModule):
             path=f"/api/projects/{id}/location-summary/",
             **kwargs,
         )
-    
-    def status_read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def status_read(self, id, **kwargs):
         """
         Set the project status, allow retrieval of the project status history
-        
+
         :returns: items:
           $ref: '#/components/schemas/ProjectStatus'
         type: array
-        
+
         https://docs.huvrdata.app/reference/api_projects_status_read
         """
         return self.client.request(
@@ -484,20 +411,15 @@ class ProjectsApiModule(BaseApiModule):
             path=f"/api/projects/{id}/status/",
             **kwargs,
         )
-    
-    def status_create(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def status_create(self, id, json=None, **kwargs):
         """
         Set the project status, allow retrieval of the project status history
-        
+
         :param dict json: $ref: '#/components/requestBodies/ProjectStatusEdit'
-        
+
         :returns: $ref: '#/components/schemas/ProjectDetail'
-        
+
         https://docs.huvrdata.app/reference/api_projects_status_create
         """
         return self.client.request(
@@ -506,20 +428,15 @@ class ProjectsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def status_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def status_update(self, id, json=None, **kwargs):
         """
         Set the project status, allow retrieval of the project status history
-        
+
         :param dict json: $ref: '#/components/requestBodies/ProjectStatusEdit'
-        
+
         :returns: $ref: '#/components/schemas/ProjectDetail'
-        
+
         https://docs.huvrdata.app/reference/api_projects_status_update
         """
         return self.client.request(
@@ -528,20 +445,15 @@ class ProjectsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def watch(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def watch(self, id, json=None, **kwargs):
         """
         Set the project watchers, allow retrival of the project watchers
-        
+
         :param dict json: $ref: '#/components/schemas/ProjectShare'
-        
+
         :returns: $ref: '#/components/schemas/ProjectDetail'
-        
+
         https://docs.huvrdata.app/reference/api_projects_watch
         """
         return self.client.request(
@@ -550,4 +462,3 @@ class ProjectsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    

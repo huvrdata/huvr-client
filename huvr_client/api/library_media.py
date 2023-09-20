@@ -6,15 +6,10 @@ from .base_api_module import BaseApiModule
 
 
 class LibraryMediaApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         GET /api/library-media/
-        
+
         :param dict params: assigned: string
         library: string
         library_name: string
@@ -22,7 +17,7 @@ class LibraryMediaApiModule(BaseApiModule):
         name: string
         offset: integer
         ordering: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -42,7 +37,7 @@ class LibraryMediaApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_library-media_list
         """
         return self.client.request(
@@ -51,22 +46,18 @@ class LibraryMediaApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         create library media, the actual media object is hosted on GCS.
         For larger files, the preferred method is send the data directly storage.
-        
+
         Generate a signed url that will allow the client to upload directly to GCS.
-        
+
         :param dict json: $ref: '#/components/requestBodies/LibraryMediaCreate'
-        
+
         :returns: $ref: '#/components/schemas/LibraryMedia'
-        
+
         https://docs.huvrdata.app/reference/api_library-media_create
         """
         return self.client.request(
@@ -75,16 +66,12 @@ class LibraryMediaApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def summary(
-        self,
-        params=None,
-        **kwargs
-    ):
+
+    def summary(self, params=None, **kwargs):
         """
         View library media
-        
-        
+
+
         :param dict params: assigned: string
         library: string
         library_name: string
@@ -92,9 +79,9 @@ class LibraryMediaApiModule(BaseApiModule):
         name: string
         offset: integer
         ordering: string
-        
+
         :returns: $ref: '#/components/schemas/LibraryMediaSummary'
-        
+
         https://docs.huvrdata.app/reference/api_library-media_summary
         """
         return self.client.request(
@@ -103,18 +90,14 @@ class LibraryMediaApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific library media
         :params id media ID
-        
+
         :returns: $ref: '#/components/schemas/LibraryMedia'
-        
+
         https://docs.huvrdata.app/reference/api_library-media_read
         """
         return self.client.request(
@@ -122,21 +105,16 @@ class LibraryMediaApiModule(BaseApiModule):
             path=f"/api/library-media/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         View library media
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/LibraryMediaCreate'
-        
+
         :returns: $ref: '#/components/schemas/LibraryMedia'
-        
+
         https://docs.huvrdata.app/reference/api_library-media_update
         """
         return self.client.request(
@@ -145,21 +123,16 @@ class LibraryMediaApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         View library media
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/LibraryMediaCreate'
-        
+
         :returns: $ref: '#/components/schemas/LibraryMediaCreate'
-        
+
         https://docs.huvrdata.app/reference/api_library-media_partial_update
         """
         return self.client.request(
@@ -168,15 +141,11 @@ class LibraryMediaApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete(self, id, **kwargs):
         """
         View library media
-        
+
         https://docs.huvrdata.app/reference/api_library-media_delete
         """
         return self.client.request(
@@ -184,4 +153,3 @@ class LibraryMediaApiModule(BaseApiModule):
             path=f"/api/library-media/{id}/",
             **kwargs,
         )
-    

@@ -6,22 +6,17 @@ from .base_api_module import BaseApiModule
 
 
 class LibrariesApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         GET /api/libraries/
-        
+
         :param dict params: assigned: string
         limit: integer
         name: string
         offset: integer
         ordering: string
         system: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -41,7 +36,7 @@ class LibrariesApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_libraries_list
         """
         return self.client.request(
@@ -50,18 +45,14 @@ class LibrariesApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         View library media
-        
-        
+
+
         :returns: $ref: '#/components/schemas/Library'
-        
+
         https://docs.huvrdata.app/reference/api_libraries_read
         """
         return self.client.request(
@@ -69,4 +60,3 @@ class LibrariesApiModule(BaseApiModule):
             path=f"/api/libraries/{id}/",
             **kwargs,
         )
-    

@@ -6,15 +6,10 @@ from .base_api_module import BaseApiModule
 
 
 class ChecklistsApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         Returns an array of checklist instances.
-        
+
         :param dict params: asset: string
         asset__asset_path_cache__path: string
         asset__id: string
@@ -35,7 +30,7 @@ class ChecklistsApiModule(BaseApiModule):
         template__id__in: string
         template__name: string
         template__type: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -55,7 +50,7 @@ class ChecklistsApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_checklists_list
         """
         return self.client.request(
@@ -64,20 +59,16 @@ class ChecklistsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         View Checklist Instances
-        
-        
+
+
         :param dict json: $ref: '#/components/schemas/ChecklistInstanceCreate'
-        
+
         :returns: $ref: '#/components/schemas/ChecklistInstance'
-        
+
         https://docs.huvrdata.app/reference/api_checklists_create
         """
         return self.client.request(
@@ -86,18 +77,14 @@ class ChecklistsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific Checklist Instances
         :params id Instance ID
-        
+
         :returns: $ref: '#/components/schemas/ChecklistInstance'
-        
+
         https://docs.huvrdata.app/reference/api_checklists_read
         """
         return self.client.request(
@@ -105,20 +92,15 @@ class ChecklistsApiModule(BaseApiModule):
             path=f"/api/checklists/{id}/",
             **kwargs,
         )
-    
-    def edit(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def edit(self, id, json=None, **kwargs):
         """
         edit a checklist instance
-        
+
         :param dict json: $ref: '#/components/schemas/ChecklistEditInline'
-        
+
         :returns: $ref: '#/components/schemas/ChecklistInstance'
-        
+
         https://docs.huvrdata.app/reference/api_checklists_edit
         """
         return self.client.request(
@@ -127,19 +109,15 @@ class ChecklistsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def revisions_read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def revisions_read(self, id, **kwargs):
         """
         Set revisions object
-        
+
         :returns: items:
           $ref: '#/components/schemas/ChecklistRevisionEdit'
         type: array
-        
+
         https://docs.huvrdata.app/reference/api_checklists_revisions_read
         """
         return self.client.request(
@@ -147,20 +125,15 @@ class ChecklistsApiModule(BaseApiModule):
             path=f"/api/checklists/{id}/revisions/",
             **kwargs,
         )
-    
-    def revisions_partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def revisions_partial_update(self, id, json=None, **kwargs):
         """
         Set revisions object
-        
+
         :param dict json: $ref: '#/components/schemas/ChecklistEdit'
-        
+
         :returns: $ref: '#/components/schemas/ChecklistInstance'
-        
+
         https://docs.huvrdata.app/reference/api_checklists_revisions_partial_update
         """
         return self.client.request(
@@ -169,20 +142,15 @@ class ChecklistsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def overlays_create(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def overlays_create(self, id, json=None, **kwargs):
         """
         add or edit a overlay on a media object
-        
+
         :param dict json: $ref: '#/components/requestBodies/InspectionMediaOverlayCreate'
-        
+
         :returns: $ref: '#/components/schemas/InspectionMedia'
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media_overlays_create
         """
         return self.client.request(
@@ -191,20 +159,15 @@ class ChecklistsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def overlays_partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def overlays_partial_update(self, id, json=None, **kwargs):
         """
         add or edit a overlay on a media object
-        
+
         :param dict json: $ref: '#/components/requestBodies/InspectionMedia'
-        
+
         :returns: $ref: '#/components/schemas/InspectionMedia'
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media_overlays_partial_update
         """
         return self.client.request(
@@ -213,4 +176,3 @@ class ChecklistsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    

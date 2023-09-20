@@ -6,19 +6,14 @@ from .base_api_module import BaseApiModule
 
 
 class AssessmentTypesApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         Returns an array assessment types.
-        
+
         :param dict params: limit: integer
         offset: integer
         ordering: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -38,7 +33,7 @@ class AssessmentTypesApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_assessment-types_list
         """
         return self.client.request(
@@ -47,18 +42,14 @@ class AssessmentTypesApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific assessment type
         :params id Assessment ID
-        
+
         :returns: $ref: '#/components/schemas/AssessmentType'
-        
+
         https://docs.huvrdata.app/reference/api_assessment-types_read
         """
         return self.client.request(
@@ -66,4 +57,3 @@ class AssessmentTypesApiModule(BaseApiModule):
             path=f"/api/assessment-types/{id}/",
             **kwargs,
         )
-    

@@ -6,19 +6,14 @@ from .base_api_module import BaseApiModule
 
 
 class ObservationsSummaryApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         The Observations API returns a summary/counts of checklist instance data
         based on the grouping of the checklist template. The templates are
         typically filtered by a category. (i.e. Safety)
-        
-        
-        
+
+
+
         :param dict params: asset: string
         asset__asset_path_cache__path: string
         asset__id: string
@@ -39,7 +34,7 @@ class ObservationsSummaryApiModule(BaseApiModule):
         template__id__in: string
         template__name: string
         template__type: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -59,7 +54,7 @@ class ObservationsSummaryApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_observations-summary_list
         """
         return self.client.request(
@@ -68,4 +63,3 @@ class ObservationsSummaryApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    

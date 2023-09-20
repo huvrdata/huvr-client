@@ -6,19 +6,14 @@ from .base_api_module import BaseApiModule
 
 
 class ReservationsApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         Returns an array reservations.
-        
+
         :param dict params: limit: integer
         offset: integer
         ordering: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -38,7 +33,7 @@ class ReservationsApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_reservations_list
         """
         return self.client.request(
@@ -47,19 +42,15 @@ class ReservationsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         accept a flat object for create, return nested detail object
-        
+
         :param dict json: $ref: '#/components/schemas/ReservationCreate'
-        
+
         :returns: $ref: '#/components/schemas/Reservation'
-        
+
         https://docs.huvrdata.app/reference/api_reservations_create
         """
         return self.client.request(
@@ -68,19 +59,15 @@ class ReservationsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def states(
-        self,
-        params=None,
-        **kwargs
-    ):
+
+    def states(self, params=None, **kwargs):
         """
         return a list reservation enums
-        
+
         :param dict params: limit: integer
         offset: integer
         ordering: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -100,7 +87,7 @@ class ReservationsApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_reservations_states
         """
         return self.client.request(
@@ -109,18 +96,14 @@ class ReservationsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific Reservation
         :params id Reservation ID
-        
+
         :returns: $ref: '#/components/schemas/Reservation'
-        
+
         https://docs.huvrdata.app/reference/api_reservations_read
         """
         return self.client.request(
@@ -128,20 +111,15 @@ class ReservationsApiModule(BaseApiModule):
             path=f"/api/reservations/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         Reservation update and add reservation history
-        
+
         :param dict json: $ref: '#/components/requestBodies/ReservationUpdate'
-        
+
         :returns: $ref: '#/components/schemas/Reservation'
-        
+
         https://docs.huvrdata.app/reference/api_reservations_update
         """
         return self.client.request(
@@ -150,21 +128,16 @@ class ReservationsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         View reservations
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/ReservationUpdate'
-        
+
         :returns: $ref: '#/components/schemas/ReservationUpdate'
-        
+
         https://docs.huvrdata.app/reference/api_reservations_partial_update
         """
         return self.client.request(
@@ -173,15 +146,11 @@ class ReservationsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete(self, id, **kwargs):
         """
         View reservations
-        
+
         https://docs.huvrdata.app/reference/api_reservations_delete
         """
         return self.client.request(
@@ -189,4 +158,3 @@ class ReservationsApiModule(BaseApiModule):
             path=f"/api/reservations/{id}/",
             **kwargs,
         )
-    

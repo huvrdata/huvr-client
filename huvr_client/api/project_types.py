@@ -6,22 +6,17 @@ from .base_api_module import BaseApiModule
 
 
 class ProjectTypesApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         Returns an array project types.
-        
+
         :param dict params: in_use: string
         is_active: string
         limit: integer
         name: string
         offset: integer
         ordering: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -41,7 +36,7 @@ class ProjectTypesApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_project-types_list
         """
         return self.client.request(
@@ -50,19 +45,15 @@ class ProjectTypesApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         accept a flat object for create, return nested detail object
-        
+
         :param dict json: $ref: '#/components/requestBodies/ProjectTypeCreate'
-        
+
         :returns: $ref: '#/components/schemas/ProjectTypeDetail'
-        
+
         https://docs.huvrdata.app/reference/api_project-types_create
         """
         return self.client.request(
@@ -71,18 +62,14 @@ class ProjectTypesApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific project type
         :params id project_type ID
-        
+
         :returns: $ref: '#/components/schemas/ProjectTypeDetail'
-        
+
         https://docs.huvrdata.app/reference/api_project-types_read
         """
         return self.client.request(
@@ -90,21 +77,16 @@ class ProjectTypesApiModule(BaseApiModule):
             path=f"/api/project-types/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         Project Type endpoint
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/ProjectTypeCreate'
-        
+
         :returns: $ref: '#/components/schemas/ProjectTypeDetail'
-        
+
         https://docs.huvrdata.app/reference/api_project-types_update
         """
         return self.client.request(
@@ -113,21 +95,16 @@ class ProjectTypesApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         Project Type endpoint
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/ProjectTypeCreate'
-        
+
         :returns: $ref: '#/components/schemas/ProjectTypeCreate'
-        
+
         https://docs.huvrdata.app/reference/api_project-types_partial_update
         """
         return self.client.request(
@@ -136,15 +113,11 @@ class ProjectTypesApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete(self, id, **kwargs):
         """
         Project Type endpoint
-        
+
         https://docs.huvrdata.app/reference/api_project-types_delete
         """
         return self.client.request(
@@ -152,4 +125,3 @@ class ProjectTypesApiModule(BaseApiModule):
             path=f"/api/project-types/{id}/",
             **kwargs,
         )
-    

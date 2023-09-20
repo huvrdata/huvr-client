@@ -14,4 +14,9 @@ test:
 ipython:
 	make run cmd="ipython -c 'from huvr_client import get_huvr_client, HuvrClient' -i"
 
+lint:
+	make run cmd="black huvr_client"
+
+
+
 .PHONY: build bash test

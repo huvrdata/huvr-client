@@ -6,12 +6,7 @@ from .base_api_module import BaseApiModule
 
 
 class MeasurementsApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         :param dict params: cml: string
         cml__name: string
@@ -23,7 +18,7 @@ class MeasurementsApiModule(BaseApiModule):
         search: string
         state: string
         type: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -43,7 +38,7 @@ class MeasurementsApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_measurements_list
         """
         return self.client.request(
@@ -52,19 +47,15 @@ class MeasurementsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         create Measurement
-        
+
         :param dict json: $ref: '#/components/requestBodies/MeasurementCreate'
-        
+
         :returns: $ref: '#/components/schemas/Measurement'
-        
+
         https://docs.huvrdata.app/reference/api_measurements_create
         """
         return self.client.request(
@@ -73,15 +64,11 @@ class MeasurementsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def delete(self, json=None, **kwargs):
         """
         :param dict json: $ref: '#/components/schemas/Measurement'
-        
+
         https://docs.huvrdata.app/reference/api_measurements_delete
         """
         return self.client.request(
@@ -90,21 +77,17 @@ class MeasurementsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def import_measurements(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def import_measurements(self, json=None, **kwargs):
         """
         import measurements
         if asset_path is passed in. We will walk the downtree assets
         looking for matching CML's
-        
+
         :param dict json: $ref: '#/components/schemas/MeasurementImport'
-        
+
         :returns: $ref: '#/components/schemas/Measurement'
-        
+
         https://docs.huvrdata.app/reference/api_measurements_import_measurements
         """
         return self.client.request(
@@ -113,15 +96,11 @@ class MeasurementsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         :returns: $ref: '#/components/schemas/Measurement'
-        
+
         https://docs.huvrdata.app/reference/api_measurements_read
         """
         return self.client.request(
@@ -129,18 +108,13 @@ class MeasurementsApiModule(BaseApiModule):
             path=f"/api/measurements/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         :param dict json: $ref: '#/components/requestBodies/MeasurementCreate'
-        
+
         :returns: $ref: '#/components/schemas/Measurement'
-        
+
         https://docs.huvrdata.app/reference/api_measurements_update
         """
         return self.client.request(
@@ -149,18 +123,13 @@ class MeasurementsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         :param dict json: $ref: '#/components/requestBodies/MeasurementCreate'
-        
+
         :returns: $ref: '#/components/schemas/MeasurementCreate'
-        
+
         https://docs.huvrdata.app/reference/api_measurements_partial_update
         """
         return self.client.request(
@@ -169,12 +138,8 @@ class MeasurementsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete_alt(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete_alt(self, id, **kwargs):
         """
         https://docs.huvrdata.app/reference/api_measurements_delete_alt
         """
@@ -183,4 +148,3 @@ class MeasurementsApiModule(BaseApiModule):
             path=f"/api/measurements/{id}/",
             **kwargs,
         )
-    

@@ -6,15 +6,10 @@ from .base_api_module import BaseApiModule
 
 
 class HeatDataApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         Returns an array HEAT data
-        
+
         :param dict params: billet_weight: string
         charge_weight: string
         created_on: string
@@ -29,7 +24,7 @@ class HeatDataApiModule(BaseApiModule):
         shift: string
         source__name: string
         tap_start: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -49,7 +44,7 @@ class HeatDataApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_heat-data_list
         """
         return self.client.request(
@@ -58,18 +53,14 @@ class HeatDataApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific HEAT data
         :params id HeatData ID
-        
+
         :returns: $ref: '#/components/schemas/HeatData'
-        
+
         https://docs.huvrdata.app/reference/api_heat-data_read
         """
         return self.client.request(
@@ -77,4 +68,3 @@ class HeatDataApiModule(BaseApiModule):
             path=f"/api/heat-data/{id}/",
             **kwargs,
         )
-    

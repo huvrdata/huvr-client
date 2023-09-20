@@ -67,10 +67,12 @@ class HuvrClient:
 
         https://docs.huvrdata.app/docs/authentication
         """
-        response = self.api.auth.obtain_access_token_create(json={
-            "client_id": client_id,
-            "client_secret": client_secret,
-        })
+        response = self.api.auth.obtain_access_token_create(
+            json={
+                "client_id": client_id,
+                "client_secret": client_secret,
+            }
+        )
         response.raise_for_status()
         data = response.json()
         self.session.headers["Authorization"] = f"Token {data['access_token']}"

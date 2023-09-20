@@ -6,21 +6,16 @@ from .base_api_module import BaseApiModule
 
 
 class AssetTypesApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         Returns an array asset types.
-        
+
         :param dict params: is_active: string
         limit: integer
         name: string
         offset: integer
         ordering: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -40,7 +35,7 @@ class AssetTypesApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_asset-types_list
         """
         return self.client.request(
@@ -49,20 +44,16 @@ class AssetTypesApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         Asset Type endpoint
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/AssetType'
-        
+
         :returns: $ref: '#/components/schemas/AssetType'
-        
+
         https://docs.huvrdata.app/reference/api_asset-types_create
         """
         return self.client.request(
@@ -71,18 +62,14 @@ class AssetTypesApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific asset type
         :params id asset ID
-        
+
         :returns: $ref: '#/components/schemas/AssetType'
-        
+
         https://docs.huvrdata.app/reference/api_asset-types_read
         """
         return self.client.request(
@@ -90,20 +77,15 @@ class AssetTypesApiModule(BaseApiModule):
             path=f"/api/asset-types/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         AssetType updates
-        
+
         :param dict json: $ref: '#/components/requestBodies/AssetType'
-        
+
         :returns: $ref: '#/components/schemas/AssetType'
-        
+
         https://docs.huvrdata.app/reference/api_asset-types_update
         """
         return self.client.request(
@@ -112,21 +94,16 @@ class AssetTypesApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         Asset Type endpoint
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/AssetType'
-        
+
         :returns: $ref: '#/components/schemas/AssetType'
-        
+
         https://docs.huvrdata.app/reference/api_asset-types_partial_update
         """
         return self.client.request(
@@ -135,15 +112,11 @@ class AssetTypesApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete(self, id, **kwargs):
         """
         Asset Type endpoint
-        
+
         https://docs.huvrdata.app/reference/api_asset-types_delete
         """
         return self.client.request(
@@ -151,4 +124,3 @@ class AssetTypesApiModule(BaseApiModule):
             path=f"/api/asset-types/{id}/",
             **kwargs,
         )
-    

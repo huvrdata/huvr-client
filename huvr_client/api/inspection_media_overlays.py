@@ -6,17 +6,12 @@ from .base_api_module import BaseApiModule
 
 
 class InspectionMediaOverlaysApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         :param dict params: limit: integer
         offset: integer
         ordering: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -36,7 +31,7 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_list
         """
         return self.client.request(
@@ -45,20 +40,16 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         create inspection media overlay, the media object has to already exist.
         The defect can be passed in.
-        
+
         :param dict json: $ref: '#/components/requestBodies/InspectionMediaOverlay'
-        
+
         :returns: $ref: '#/components/schemas/InspectionMediaOverlay'
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_create
         """
         return self.client.request(
@@ -67,15 +58,11 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         :returns: $ref: '#/components/schemas/InspectionMediaOverlay'
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_read
         """
         return self.client.request(
@@ -83,18 +70,13 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
             path=f"/api/inspection-media-overlays/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         :param dict json: $ref: '#/components/requestBodies/InspectionMediaOverlay'
-        
+
         :returns: $ref: '#/components/schemas/InspectionMediaOverlay'
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_update
         """
         return self.client.request(
@@ -103,18 +85,13 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         :param dict json: $ref: '#/components/requestBodies/InspectionMediaOverlayCreate'
-        
+
         :returns: $ref: '#/components/schemas/InspectionMediaOverlayCreate'
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_partial_update
         """
         return self.client.request(
@@ -123,12 +100,8 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete(self, id, **kwargs):
         """
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_delete
         """
@@ -137,4 +110,3 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
             path=f"/api/inspection-media-overlays/{id}/",
             **kwargs,
         )
-    

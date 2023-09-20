@@ -6,12 +6,7 @@ from .base_api_module import BaseApiModule
 
 
 class InspectionMediaApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         :param dict params: captured_on: string
         checklist: string
@@ -38,7 +33,7 @@ class InspectionMediaApiModule(BaseApiModule):
         size_max: string
         size_min: string
         state: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -58,7 +53,7 @@ class InspectionMediaApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media_list
         """
         return self.client.request(
@@ -67,22 +62,18 @@ class InspectionMediaApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         create inspection media, the actual media object is hosted on GCS.
         For larger files, the preferred method is send the data directly storage.
-        
+
         Generate a signed url that will allow the client to upload directly to GCS.
-        
+
         :param dict json: $ref: '#/components/schemas/InspectionMediaCreate'
-        
+
         :returns: $ref: '#/components/schemas/InspectionMedia'
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media_create
         """
         return self.client.request(
@@ -91,15 +82,11 @@ class InspectionMediaApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def delete(self, json=None, **kwargs):
         """
         :param dict json: $ref: '#/components/requestBodies/InspectionMedia'
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media_delete
         """
         return self.client.request(
@@ -108,15 +95,11 @@ class InspectionMediaApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def edit(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def edit(self, json=None, **kwargs):
         """
         :param dict json: $ref: '#/components/requestBodies/InspectionMedia'
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media_edit
         """
         return self.client.request(
@@ -125,15 +108,11 @@ class InspectionMediaApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         :returns: $ref: '#/components/schemas/InspectionMedia'
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media_read
         """
         return self.client.request(
@@ -141,18 +120,13 @@ class InspectionMediaApiModule(BaseApiModule):
             path=f"/api/inspection-media/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         :param dict json: $ref: '#/components/requestBodies/InspectionMediaUpdate'
-        
+
         :returns: $ref: '#/components/schemas/InspectionMedia'
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media_update
         """
         return self.client.request(
@@ -161,18 +135,13 @@ class InspectionMediaApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         :param dict json: $ref: '#/components/requestBodies/InspectionMediaUpdate'
-        
+
         :returns: $ref: '#/components/schemas/InspectionMediaUpdate'
-        
+
         https://docs.huvrdata.app/reference/api_inspection-media_partial_update
         """
         return self.client.request(
@@ -181,12 +150,8 @@ class InspectionMediaApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete_alt(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete_alt(self, id, **kwargs):
         """
         https://docs.huvrdata.app/reference/api_inspection-media_delete_alt
         """
@@ -195,4 +160,3 @@ class InspectionMediaApiModule(BaseApiModule):
             path=f"/api/inspection-media/{id}/",
             **kwargs,
         )
-    

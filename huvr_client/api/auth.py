@@ -6,24 +6,19 @@ from .base_api_module import BaseApiModule
 
 
 class AuthApiModule(BaseApiModule):
-    
-    def obtain_access_token_create(
-        self,
-        json=None,
-        **kwargs
-    ):
+    def obtain_access_token_create(self, json=None, **kwargs):
         """
         NOTE - we're using `client_id` and `client_secret`
             standard naming for "OAuth Client Credentials Flow"
             they map internally to service user's `email` and `password`
             https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow
-        
+
         Return a short-lived Token used for subsequent requests
-        
+
         :param dict json: $ref: '#/components/schemas/ObtainAccessTokenRequest'
-        
+
         :returns: $ref: '#/components/schemas/ObtainAccessTokenResponse'
-        
+
         https://docs.huvrdata.app/reference/api_auth_obtain-access-token_create
         """
         return self.client.request(
@@ -32,16 +27,13 @@ class AuthApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def session_login_create(
-        self,
-        **kwargs
-    ):
+
+    def session_login_create(self, **kwargs):
         """
         Verify JWT from client
          - sets `auth` cookie on response (used for _firebase_ auth)
          - sets `sessionid` cookie on response (used for _django_ auth)
-        
+
         https://docs.huvrdata.app/reference/api_auth_session-login_create
         """
         return self.client.request(
@@ -49,14 +41,11 @@ class AuthApiModule(BaseApiModule):
             path=f"/api/auth/session-login/",
             **kwargs,
         )
-    
-    def session_logout_create(
-        self,
-        **kwargs
-    ):
+
+    def session_logout_create(self, **kwargs):
         """
         Removes session cookie
-        
+
         https://docs.huvrdata.app/reference/api_auth_session-logout_create
         """
         return self.client.request(
@@ -64,4 +53,3 @@ class AuthApiModule(BaseApiModule):
             path=f"/api/auth/session-logout/",
             **kwargs,
         )
-    

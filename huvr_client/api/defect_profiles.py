@@ -6,19 +6,14 @@ from .base_api_module import BaseApiModule
 
 
 class DefectProfilesApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         Returns an array of defect profiles.
-        
+
         :param dict params: limit: integer
         offset: integer
         ordering: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -38,7 +33,7 @@ class DefectProfilesApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_defect-profiles_list
         """
         return self.client.request(
@@ -47,20 +42,16 @@ class DefectProfilesApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         View DefectProfile
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/DefectProfile'
-        
+
         :returns: $ref: '#/components/schemas/DefectProfile'
-        
+
         https://docs.huvrdata.app/reference/api_defect-profiles_create
         """
         return self.client.request(
@@ -69,18 +60,14 @@ class DefectProfilesApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific Defect Profile
         :params id
-        
+
         :returns: $ref: '#/components/schemas/DefectProfile'
-        
+
         https://docs.huvrdata.app/reference/api_defect-profiles_read
         """
         return self.client.request(
@@ -88,21 +75,16 @@ class DefectProfilesApiModule(BaseApiModule):
             path=f"/api/defect-profiles/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         View DefectProfile
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/DefectProfile'
-        
+
         :returns: $ref: '#/components/schemas/DefectProfile'
-        
+
         https://docs.huvrdata.app/reference/api_defect-profiles_update
         """
         return self.client.request(
@@ -111,21 +93,16 @@ class DefectProfilesApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         View DefectProfile
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/DefectProfile'
-        
+
         :returns: $ref: '#/components/schemas/DefectProfile'
-        
+
         https://docs.huvrdata.app/reference/api_defect-profiles_partial_update
         """
         return self.client.request(
@@ -134,15 +111,11 @@ class DefectProfilesApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete(self, id, **kwargs):
         """
         View DefectProfile
-        
+
         https://docs.huvrdata.app/reference/api_defect-profiles_delete
         """
         return self.client.request(
@@ -150,4 +123,3 @@ class DefectProfilesApiModule(BaseApiModule):
             path=f"/api/defect-profiles/{id}/",
             **kwargs,
         )
-    

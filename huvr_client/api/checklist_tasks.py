@@ -6,15 +6,10 @@ from .base_api_module import BaseApiModule
 
 
 class ChecklistTasksApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         Returns an array of ChecklistTasks.
-        
+
         :param dict params: assigned: string
         assigned_to: string
         checklist: string
@@ -24,7 +19,7 @@ class ChecklistTasksApiModule(BaseApiModule):
         ordering: string
         project: string
         task: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -44,7 +39,7 @@ class ChecklistTasksApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_checklist-tasks_list
         """
         return self.client.request(
@@ -53,20 +48,16 @@ class ChecklistTasksApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         View Checklist Task
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/ChecklistTaskCreate'
-        
+
         :returns: $ref: '#/components/schemas/ChecklistTask'
-        
+
         https://docs.huvrdata.app/reference/api_checklist-tasks_create
         """
         return self.client.request(
@@ -75,18 +66,14 @@ class ChecklistTasksApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific Checklist Task
         :params id
-        
+
         :returns: $ref: '#/components/schemas/ChecklistTask'
-        
+
         https://docs.huvrdata.app/reference/api_checklist-tasks_read
         """
         return self.client.request(
@@ -94,21 +81,16 @@ class ChecklistTasksApiModule(BaseApiModule):
             path=f"/api/checklist-tasks/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         View Checklist Task
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/ChecklistTaskCreate'
-        
+
         :returns: $ref: '#/components/schemas/ChecklistTask'
-        
+
         https://docs.huvrdata.app/reference/api_checklist-tasks_update
         """
         return self.client.request(
@@ -117,21 +99,16 @@ class ChecklistTasksApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         View Checklist Task
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/ChecklistTaskCreate'
-        
+
         :returns: $ref: '#/components/schemas/ChecklistTaskCreate'
-        
+
         https://docs.huvrdata.app/reference/api_checklist-tasks_partial_update
         """
         return self.client.request(
@@ -140,15 +117,11 @@ class ChecklistTasksApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete(self, id, **kwargs):
         """
         View Checklist Task
-        
+
         https://docs.huvrdata.app/reference/api_checklist-tasks_delete
         """
         return self.client.request(
@@ -156,4 +129,3 @@ class ChecklistTasksApiModule(BaseApiModule):
             path=f"/api/checklist-tasks/{id}/",
             **kwargs,
         )
-    

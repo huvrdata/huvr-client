@@ -1,5 +1,3 @@
-
-
 from .assessment_types import AssessmentTypesApiModule
 
 from .assessments import AssessmentsApiModule
@@ -63,64 +61,62 @@ from .users import UsersApiModule
 
 class Api:
     def __init__(self, client):
-        
         self.assessment_types = AssessmentTypesApiModule(client)
-        
+
         self.assessments = AssessmentsApiModule(client)
-        
+
         self.asset_types = AssetTypesApiModule(client)
-        
+
         self.assets = AssetsApiModule(client)
-        
+
         self.auth = AuthApiModule(client)
-        
+
         self.checklist_result_lines = ChecklistResultLinesApiModule(client)
-        
+
         self.checklist_tasks = ChecklistTasksApiModule(client)
-        
+
         self.checklist_templates_fillable = ChecklistTemplatesFillableApiModule(client)
-        
+
         self.checklist_templates = ChecklistTemplatesApiModule(client)
-        
+
         self.checklists = ChecklistsApiModule(client)
-        
+
         self.cmls = CmlsApiModule(client)
-        
+
         self.companies = CompaniesApiModule(client)
-        
+
         self.crews = CrewsApiModule(client)
-        
+
         self.defect_profiles = DefectProfilesApiModule(client)
-        
+
         self.defects = DefectsApiModule(client)
-        
+
         self.heat_data = HeatDataApiModule(client)
-        
+
         self.inspection_media_overlays = InspectionMediaOverlaysApiModule(client)
-        
+
         self.inspection_media = InspectionMediaApiModule(client)
-        
+
         self.libraries = LibrariesApiModule(client)
-        
+
         self.library_media = LibraryMediaApiModule(client)
-        
+
         self.location_layer_profiles = LocationLayerProfilesApiModule(client)
-        
+
         self.measurements = MeasurementsApiModule(client)
-        
+
         self.observations_summary = ObservationsSummaryApiModule(client)
-        
+
         self.pages = PagesApiModule(client)
-        
+
         self.project_types = ProjectTypesApiModule(client)
-        
+
         self.projects = ProjectsApiModule(client)
-        
+
         self.recommended_work_plans = RecommendedWorkPlansApiModule(client)
-        
+
         self.reservations = ReservationsApiModule(client)
-        
+
         self.schedules = SchedulesApiModule(client)
-        
+
         self.users = UsersApiModule(client)
-        

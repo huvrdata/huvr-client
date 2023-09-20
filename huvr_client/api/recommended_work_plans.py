@@ -6,15 +6,10 @@ from .base_api_module import BaseApiModule
 
 
 class RecommendedWorkPlansApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         return an array of RecommendedWorkPlan
-        
+
         :param dict params: assessment_revision__assessment__asset: string
         assessment_revision__assessment__asset__asset_path_cache__path: string
         asset__descendants: string
@@ -29,7 +24,7 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
         risk_score__display: string
         risk_score__level: string
         status__in: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -49,7 +44,7 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_recommended-work-plans_list
         """
         return self.client.request(
@@ -58,20 +53,16 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         View RecommendedWorkPlan
         * Requires authentication
-        
+
         :param dict json: $ref: '#/components/requestBodies/RecommendedWorkPlanDetail'
-        
+
         :returns: $ref: '#/components/schemas/RecommendedWorkPlanDetail'
-        
+
         https://docs.huvrdata.app/reference/api_recommended-work-plans_create
         """
         return self.client.request(
@@ -80,20 +71,16 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def bulk_edit(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def bulk_edit(self, json=None, **kwargs):
         """
         View RecommendedWorkPlan
         * Requires authentication
-        
+
         :param dict json: $ref: '#/components/requestBodies/RecommendedWorkPlanDetail'
-        
+
         :returns: $ref: '#/components/schemas/RecommendedWorkPlanDetail'
-        
+
         https://docs.huvrdata.app/reference/api_recommended-work-plans_bulk_edit
         """
         return self.client.request(
@@ -102,17 +89,13 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific RecommendedWorkPlan
-        
+
         :returns: $ref: '#/components/schemas/RecommendedWorkPlanDetail'
-        
+
         https://docs.huvrdata.app/reference/api_recommended-work-plans_read
         """
         return self.client.request(
@@ -120,21 +103,16 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
             path=f"/api/recommended-work-plans/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         View RecommendedWorkPlan
         * Requires authentication
-        
+
         :param dict json: $ref: '#/components/requestBodies/RecommendedWorkPlanDetail'
-        
+
         :returns: $ref: '#/components/schemas/RecommendedWorkPlanDetail'
-        
+
         https://docs.huvrdata.app/reference/api_recommended-work-plans_update
         """
         return self.client.request(
@@ -143,21 +121,16 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         View RecommendedWorkPlan
         * Requires authentication
-        
+
         :param dict json: $ref: '#/components/requestBodies/RecommendedWorkPlanDetail'
-        
+
         :returns: $ref: '#/components/schemas/RecommendedWorkPlanDetail'
-        
+
         https://docs.huvrdata.app/reference/api_recommended-work-plans_partial_update
         """
         return self.client.request(
@@ -166,16 +139,12 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete(self, id, **kwargs):
         """
         View RecommendedWorkPlan
         * Requires authentication
-        
+
         https://docs.huvrdata.app/reference/api_recommended-work-plans_delete
         """
         return self.client.request(
@@ -183,4 +152,3 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
             path=f"/api/recommended-work-plans/{id}/",
             **kwargs,
         )
-    

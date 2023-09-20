@@ -6,15 +6,10 @@ from .base_api_module import BaseApiModule
 
 
 class CrewsApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         Returns an array of Crew objectss
-        
+
         :param dict params: company: string
         is_active: string
         limit: integer
@@ -22,7 +17,7 @@ class CrewsApiModule(BaseApiModule):
         offset: integer
         ordering: string
         user: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -42,7 +37,7 @@ class CrewsApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_crews_list
         """
         return self.client.request(
@@ -51,19 +46,15 @@ class CrewsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def create(
-        self,
-        json=None,
-        **kwargs
-    ):
+
+    def create(self, json=None, **kwargs):
         """
         accept a flat object for create, return nested detail object
-        
+
         :param dict json: $ref: '#/components/schemas/CrewCreate'
-        
+
         :returns: $ref: '#/components/schemas/CrewDetail'
-        
+
         https://docs.huvrdata.app/reference/api_crews_create
         """
         return self.client.request(
@@ -72,18 +63,14 @@ class CrewsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific Crew
         :params id crew ID
-        
+
         :returns: $ref: '#/components/schemas/CrewDetail'
-        
+
         https://docs.huvrdata.app/reference/api_crews_read
         """
         return self.client.request(
@@ -91,20 +78,15 @@ class CrewsApiModule(BaseApiModule):
             path=f"/api/crews/{id}/",
             **kwargs,
         )
-    
-    def update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def update(self, id, json=None, **kwargs):
         """
         Crew update. Company is ignored on updates
-        
+
         :param dict json: $ref: '#/components/requestBodies/CrewUpdate'
-        
+
         :returns: $ref: '#/components/schemas/CrewDetail'
-        
+
         https://docs.huvrdata.app/reference/api_crews_update
         """
         return self.client.request(
@@ -113,21 +95,16 @@ class CrewsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def partial_update(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def partial_update(self, id, json=None, **kwargs):
         """
         Crew endpoint
-        
-        
+
+
         :param dict json: $ref: '#/components/requestBodies/CrewUpdate'
-        
+
         :returns: $ref: '#/components/schemas/CrewUpdate'
-        
+
         https://docs.huvrdata.app/reference/api_crews_partial_update
         """
         return self.client.request(
@@ -136,15 +113,11 @@ class CrewsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    
-    def delete(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def delete(self, id, **kwargs):
         """
         Crew endpoint
-        
+
         https://docs.huvrdata.app/reference/api_crews_delete
         """
         return self.client.request(
@@ -152,4 +125,3 @@ class CrewsApiModule(BaseApiModule):
             path=f"/api/crews/{id}/",
             **kwargs,
         )
-    

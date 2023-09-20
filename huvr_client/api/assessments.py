@@ -6,12 +6,7 @@ from .base_api_module import BaseApiModule
 
 
 class AssessmentsApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         {
                 "count": 1,
@@ -20,7 +15,7 @@ class AssessmentsApiModule(BaseApiModule):
                 "results": [ { ... } ],
                 "risk_matrix_rollup": [ ... ],
             }
-        
+
         :param dict params: asset: string
         asset__asset_path_cache__path: string
         asset__descendants: string
@@ -36,7 +31,7 @@ class AssessmentsApiModule(BaseApiModule):
         risk_score__display: string
         risk_score__pof: string
         status__in: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -56,7 +51,7 @@ class AssessmentsApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_assessments_list
         """
         return self.client.request(
@@ -65,18 +60,14 @@ class AssessmentsApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return the specific Assessment
         :params id Assessment ID
-        
+
         :returns: $ref: '#/components/schemas/AssessmentDetail'
-        
+
         https://docs.huvrdata.app/reference/api_assessments_read
         """
         return self.client.request(
@@ -84,18 +75,13 @@ class AssessmentsApiModule(BaseApiModule):
             path=f"/api/assessments/{id}/",
             **kwargs,
         )
-    
-    def revision(
-        self,
-        id,
-        json=None,
-        **kwargs
-    ):
+
+    def revision(self, id, json=None, **kwargs):
         """
         :param dict json: $ref: '#/components/schemas/AssessmentDetail'
-        
+
         :returns: $ref: '#/components/schemas/AssessmentDetail'
-        
+
         https://docs.huvrdata.app/reference/api_assessments_revision
         """
         return self.client.request(
@@ -104,4 +90,3 @@ class AssessmentsApiModule(BaseApiModule):
             json=json,
             **kwargs,
         )
-    

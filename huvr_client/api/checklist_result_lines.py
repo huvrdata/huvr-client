@@ -6,15 +6,10 @@ from .base_api_module import BaseApiModule
 
 
 class ChecklistResultLinesApiModule(BaseApiModule):
-    
-    def list(
-        self,
-        params=None,
-        **kwargs
-    ):
+    def list(self, params=None, **kwargs):
         """
         Returns a list of ChecklistResultLines, supports various filters
-        
+
         :param dict params: checklist: string
         checklist__project: string
         checklist__project__name: string
@@ -37,7 +32,7 @@ class ChecklistResultLinesApiModule(BaseApiModule):
         template_line__section_label: string
         template_line__type: string
         value: string
-        
+
         :returns: properties:
           count:
             type: integer
@@ -57,7 +52,7 @@ class ChecklistResultLinesApiModule(BaseApiModule):
         - count
         - results
         type: object
-        
+
         https://docs.huvrdata.app/reference/api_checklist-result-lines_list
         """
         return self.client.request(
@@ -66,19 +61,15 @@ class ChecklistResultLinesApiModule(BaseApiModule):
             params=params,
             **kwargs,
         )
-    
-    def read(
-        self,
-        id,
-        **kwargs
-    ):
+
+    def read(self, id, **kwargs):
         """
         Return a single ChecklistResultLine by id
             `id` pattern: "{checklist_id}::{section_key}::{line_key}"
             for example: "24::my_section::my_line"
-        
+
         :returns: $ref: '#/components/schemas/ChecklistResultLine'
-        
+
         https://docs.huvrdata.app/reference/api_checklist-result-lines_read
         """
         return self.client.request(
@@ -86,4 +77,3 @@ class ChecklistResultLinesApiModule(BaseApiModule):
             path=f"/api/checklist-result-lines/{id}/",
             **kwargs,
         )
-    
