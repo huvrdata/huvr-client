@@ -11,4 +11,7 @@ generate_api:
 test:
 	make run cmd="pytest huvr_client"
 
+ipython:
+	make run cmd="ipython -c 'from huvr_client import get_huvr_client, HuvrClient' -i"
+
 .PHONY: build bash test
