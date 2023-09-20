@@ -1,0 +1,10 @@
+
+{% for module in api_modules %}
+from .{{ module.module_name }} import {{ module.class_name }}ApiModule
+{% endfor %}
+
+class Api:
+    def __init__(self, client):
+        {% for module in api_modules %}
+        self.{{ module.module_name }} = {{ module.class_name }}ApiModule(client)
+        {% endfor %}
