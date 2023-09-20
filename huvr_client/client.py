@@ -1,6 +1,37 @@
 import requests
 
-from .api.api import Api
+# !! be sure to keep this up to date after regenerating !!
+
+from .api.assessment_types import AssessmentTypesApiModule
+from .api.assessments import AssessmentsApiModule
+from .api.asset_types import AssetTypesApiModule
+from .api.assets import AssetsApiModule
+from .api.auth import AuthApiModule
+from .api.checklist_result_lines import ChecklistResultLinesApiModule
+from .api.checklist_tasks import ChecklistTasksApiModule
+from .api.checklist_templates_fillable import ChecklistTemplatesFillableApiModule
+from .api.checklist_templates import ChecklistTemplatesApiModule
+from .api.checklists import ChecklistsApiModule
+from .api.cmls import CmlsApiModule
+from .api.companies import CompaniesApiModule
+from .api.crews import CrewsApiModule
+from .api.defect_profiles import DefectProfilesApiModule
+from .api.defects import DefectsApiModule
+from .api.heat_data import HeatDataApiModule
+from .api.inspection_media_overlays import InspectionMediaOverlaysApiModule
+from .api.inspection_media import InspectionMediaApiModule
+from .api.libraries import LibrariesApiModule
+from .api.library_media import LibraryMediaApiModule
+from .api.location_layer_profiles import LocationLayerProfilesApiModule
+from .api.measurements import MeasurementsApiModule
+from .api.observations_summary import ObservationsSummaryApiModule
+from .api.pages import PagesApiModule
+from .api.project_types import ProjectTypesApiModule
+from .api.projects import ProjectsApiModule
+from .api.recommended_work_plans import RecommendedWorkPlansApiModule
+from .api.reservations import ReservationsApiModule
+from .api.schedules import SchedulesApiModule
+from .api.users import UsersApiModule
 
 
 class HuvrClient:
@@ -21,7 +52,6 @@ class HuvrClient:
         :param base_url: The base URL for the HUVR API. ex: https://demo.huvrdata.com
         :param verbose: print debug to stdout.
         """
-        self.api = Api(self)
         self.base_url = base_url
         # remove trailing slash if present
         if self.base_url.endswith("/"):
@@ -29,6 +59,39 @@ class HuvrClient:
 
         self.verbose = verbose
         self.session = requests.Session()
+
+        # modules
+        #
+        self.assessment_types = AssessmentTypesApiModule(self)
+        self.assessments = AssessmentsApiModule(self)
+        self.asset_types = AssetTypesApiModule(self)
+        self.assets = AssetsApiModule(self)
+        self.auth = AuthApiModule(self)
+        self.checklist_result_lines = ChecklistResultLinesApiModule(self)
+        self.checklist_tasks = ChecklistTasksApiModule(self)
+        self.checklist_templates_fillable = ChecklistTemplatesFillableApiModule(self)
+        self.checklist_templates = ChecklistTemplatesApiModule(self)
+        self.checklists = ChecklistsApiModule(self)
+        self.cmls = CmlsApiModule(self)
+        self.companies = CompaniesApiModule(self)
+        self.crews = CrewsApiModule(self)
+        self.defect_profiles = DefectProfilesApiModule(self)
+        self.defects = DefectsApiModule(self)
+        self.heat_data = HeatDataApiModule(self)
+        self.inspection_media_overlays = InspectionMediaOverlaysApiModule(self)
+        self.inspection_media = InspectionMediaApiModule(self)
+        self.libraries = LibrariesApiModule(self)
+        self.library_media = LibraryMediaApiModule(self)
+        self.location_layer_profiles = LocationLayerProfilesApiModule(self)
+        self.measurements = MeasurementsApiModule(self)
+        self.observations_summary = ObservationsSummaryApiModule(self)
+        self.pages = PagesApiModule(self)
+        self.project_types = ProjectTypesApiModule(self)
+        self.projects = ProjectsApiModule(self)
+        self.recommended_work_plans = RecommendedWorkPlansApiModule(self)
+        self.reservations = ReservationsApiModule(self)
+        self.schedules = SchedulesApiModule(self)
+        self.users = UsersApiModule(self)
 
     def request(self, method: str, path: str, **kwargs) -> "requests.Response":
         url = self.base_url + path
@@ -66,7 +129,7 @@ class HuvrClient:
 
         https://docs.huvrdata.app/docs/authentication
         """
-        response = self.api.auth.obtain_access_token_create(
+        response = self.auth.obtain_access_token_create(
             json={
                 "client_id": client_id,
                 "client_secret": client_secret,

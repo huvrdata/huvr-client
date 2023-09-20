@@ -144,11 +144,8 @@ def generate_client(spec: dict):
     with open("../huvr_client/api/base_api_module.py", "w") as f:
         f.write(templates.base_api_module_template.render())
 
-    api_modules = []
-
     for module_name, endpoints in modules.items():
         class_name = utils.to_pascal_case_from_snake(module_name)
-        api_modules.append({"module_name": module_name, "class_name": class_name })
 
         python_str = templates.api_module_template.render(
             docstring="todo",
@@ -158,11 +155,6 @@ def generate_client(spec: dict):
 
         with open(f"../huvr_client/api/{module_name}.py", "w") as f:
             f.write(python_str)
-
-    # write api.py
-
-    with open("../huvr_client/api/api.py", "w") as f:
-        f.write(templates.api_template.render(api_modules=api_modules))
 
 
 if __name__ == "__main__":
