@@ -1,4 +1,3 @@
-import re
 import requests
 
 from .api.api import Api
