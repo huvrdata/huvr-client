@@ -4,6 +4,15 @@
 """The setup script."""
 
 from setuptools import setup, find_packages
+import os
+
+
+try:
+    version = os.environ["GH_RELEASE_TAG"]
+except KeyError as e:
+    print("GH_RELEASE_TAG not set, (Hint - did you create a release on GitHub?)")
+    raise e
+
 
 with open("README.md") as readme_file:
     readme = readme_file.read()
@@ -33,4 +42,5 @@ setup(
     test_suite="tests",
     url="https://github.com/huvrdata/huvr-client",
     zip_safe=False,
+    version=version,
 )

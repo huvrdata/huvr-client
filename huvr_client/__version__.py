@@ -1,7 +1,6 @@
 __title__ = "huvr_client"
 __description__ = "Python Client for HUVRdata"
 __url__ = "https://www.huvrdata.com"
-__version__ = "1.0.0"
 __author__ = "HUVRdata"
 __author_email__ = "api@huvrdata.com"
 __license__ = "BSD 2.0"
