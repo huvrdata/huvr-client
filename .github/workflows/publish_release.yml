@@ -23,5 +23,7 @@ jobs:
         with:
           fetch-depth: 0
       - run: python3 -m pip install --upgrade build && python3 -m build
+        env:
+          GH_RELEASE_TAG: ${{ github.event.release.tag_name }}
       - name: Publish package
         uses: pypa/gh-action-pypi-publish@release/v1
