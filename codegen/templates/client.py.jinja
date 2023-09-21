@@ -1,0 +1,91 @@
+import re
+import requests
+
+{% for module in api_modules %}
+from .api.{{ module.module }} import {{ module.class_name }}
+{% endfor %}
+
+
+class HuvrClientError(Exception):
+    """
+    Base class for all HUVR API errors.
+    """
+
+    def __init__(self, message, response=None):
+        super().__init__(message)
+        self.response = response
+
+
+class HuvrClient:
+    """
+    REST API for HUVR.
+
+    See full REST API documentation at https://docs.huvrdata.com
+    """
+
+    # Type Hints for Modules
+    {% for module in api_modules %}
+    {{ module.module }}: "{{ module.class_name }}"
+    {% endfor %}
+
+    def __init__(
+        self,
+        base_url: str,
+        verbose: bool = False,
+    ):
+        """
+        Initialize the client.
+
+        :param base_url: The base URL for the HUVR API. ex: https://demo.huvrdata.com
+        :param verbose: print debug to stdout.
+        """
+        self.base_url = base_url
+        # remove trailing slash if present
+        if self.base_url.endswith("/"):
+            self.base_url = self.base_url[:-1]
+
+        self.verbose = verbose
+        self.session = requests.Session()
+
+        # Modules
+        {% for module in api_modules %}
+        self.{{ module.module }} = {{ module.class_name }}(self)
+        {% endfor %}
+
+    def request(self, method: str, path: str, **kwargs) -> "requests.Response":
+        url = self.base_url + path
+
+        # find params in the url
+        #    raises ValueError if a required param is missing from kwargs
+        for match in re.findall(r"{(\w+)}", url):
+            try:
+                url = url.format(**{match: kwargs.pop(match)})
+            except KeyError as e:
+                raise ValueError(
+                    f"Missing required parameter '{match}' in '{path}' - {repr(e)}"
+                )
+
+        headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            **kwargs.pop("headers", {}),
+        }
+
+        if self.verbose:
+            print(
+                "HUVR HTTP REQUEST: {} {} {}".format(
+                    method,
+                    url,
+                    {
+                        "headers": headers,
+                        **kwargs,
+                    },
+                )
+            )
+
+        return self.session.request(
+            method,
+            url,
+            headers=headers,
+            **kwargs,
+        )

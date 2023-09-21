@@ -88,6 +88,7 @@ env/
 venv/
 ENV/
 env.bak/
+.env.yaml
 venv.bak/
 
 # Spyder project settings
@@ -102,3 +103,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# PyCharm
+.idea/

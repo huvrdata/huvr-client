@@ -1,0 +1,5 @@
+# Copy this file to env.yaml and fill in the values
+
+BASE_URL: https://<>.huvrdata.app
+CLIENT_ID: my-client@huvrdata.com
+CLIENT_SECRET: 1234
