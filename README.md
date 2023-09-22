@@ -51,8 +51,6 @@ pass `params` to specify filters
 
 _for full list of available filters - see [API docs](https://docs.huvrdata.app)_
 
-will receive a standard python `requests.Response` object
-
 ```py
 pagination_data = client.projects.list(params={
     "asset_search": "my-site/my-asset"
@@ -81,6 +79,24 @@ project = client.projects.create(json={
 
 # result data will be raw python dicts/lists etc
 print(project["id"])
+```
+
+### Raw Request Example
+
+if requesting a non-json or "internal" endpoint, can make a raw request.
+
+this will return a standard python `requests.Response` object
+
+```py
+response = client.request_raw(
+    method="GET",
+    path="/api/.../",
+    # params={...},
+    # json={...},
+    # headers={...},
+    # data={...},
+)
+response.content  # access raw bytes, or .json(), etc
 ```
 
 ## Contributing / Internals
