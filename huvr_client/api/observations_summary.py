@@ -57,7 +57,7 @@ class ObservationsSummaryApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_observations-summary_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/observations-summary/",
             params=params,

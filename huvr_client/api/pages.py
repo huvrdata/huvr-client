@@ -36,7 +36,7 @@ class PagesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_pages_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/pages/",
             params=params,
@@ -73,7 +73,7 @@ class PagesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_pages_retrieve_by_path
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/pages/by-path/{path}/",
             params=params,
@@ -89,7 +89,7 @@ class PagesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_pages_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/pages/{id}/",
             **kwargs,

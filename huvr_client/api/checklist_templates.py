@@ -42,7 +42,7 @@ class ChecklistTemplatesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-templates_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/checklist-templates/",
             params=params,
@@ -60,7 +60,7 @@ class ChecklistTemplatesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-templates_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/checklist-templates/",
             json=json,
@@ -80,7 +80,7 @@ class ChecklistTemplatesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-templates_import_template
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/checklist-templates/import-template/",
             json=json,
@@ -96,7 +96,7 @@ class ChecklistTemplatesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-templates_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/checklist-templates/{id}/",
             **kwargs,
@@ -113,7 +113,7 @@ class ChecklistTemplatesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-templates_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/checklist-templates/{id}/",
             json=json,
@@ -131,7 +131,7 @@ class ChecklistTemplatesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-templates_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/checklist-templates/{id}/",
             json=json,
@@ -144,7 +144,7 @@ class ChecklistTemplatesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-templates_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/checklist-templates/{id}/",
             **kwargs,
@@ -156,7 +156,7 @@ class ChecklistTemplatesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-templates_export_template
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/checklist-templates/{id}/export-template/",
             **kwargs,

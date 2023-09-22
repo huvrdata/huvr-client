@@ -44,7 +44,7 @@ class UsersApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_users_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/users/",
             params=params,
@@ -62,7 +62,7 @@ class UsersApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_users_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/users/",
             json=json,
@@ -78,7 +78,7 @@ class UsersApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_users_import_users
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/users/import/",
             json=json,
@@ -105,7 +105,7 @@ class UsersApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_users_me_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/users/me/",
             params=params,
@@ -122,7 +122,7 @@ class UsersApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_users_me_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/users/me/",
             json=json,
@@ -138,7 +138,7 @@ class UsersApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_users_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/users/{id}/",
             **kwargs,
@@ -154,7 +154,7 @@ class UsersApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_users_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/users/{id}/",
             json=json,
@@ -172,7 +172,7 @@ class UsersApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_users_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/users/{id}/",
             json=json,
@@ -185,7 +185,7 @@ class UsersApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_users_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/users/{id}/",
             **kwargs,

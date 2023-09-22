@@ -36,7 +36,7 @@ class DefectProfilesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defect-profiles_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/defect-profiles/",
             params=params,
@@ -54,7 +54,7 @@ class DefectProfilesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defect-profiles_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/defect-profiles/",
             json=json,
@@ -70,7 +70,7 @@ class DefectProfilesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defect-profiles_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/defect-profiles/{id}/",
             **kwargs,
@@ -87,7 +87,7 @@ class DefectProfilesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defect-profiles_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/defect-profiles/{id}/",
             json=json,
@@ -105,7 +105,7 @@ class DefectProfilesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defect-profiles_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/defect-profiles/{id}/",
             json=json,
@@ -118,7 +118,7 @@ class DefectProfilesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defect-profiles_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/defect-profiles/{id}/",
             **kwargs,

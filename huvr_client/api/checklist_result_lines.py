@@ -55,7 +55,7 @@ class ChecklistResultLinesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-result-lines_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/checklist-result-lines/",
             params=params,
@@ -72,7 +72,7 @@ class ChecklistResultLinesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-result-lines_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/checklist-result-lines/{id}/",
             **kwargs,

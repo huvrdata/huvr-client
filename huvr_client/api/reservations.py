@@ -36,7 +36,7 @@ class ReservationsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_reservations_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/reservations/",
             params=params,
@@ -53,7 +53,7 @@ class ReservationsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_reservations_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/reservations/",
             json=json,
@@ -90,7 +90,7 @@ class ReservationsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_reservations_states
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/reservations/states/",
             params=params,
@@ -106,7 +106,7 @@ class ReservationsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_reservations_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/reservations/{id}/",
             **kwargs,
@@ -122,7 +122,7 @@ class ReservationsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_reservations_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/reservations/{id}/",
             json=json,
@@ -140,7 +140,7 @@ class ReservationsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_reservations_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/reservations/{id}/",
             json=json,
@@ -153,7 +153,7 @@ class ReservationsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_reservations_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/reservations/{id}/",
             **kwargs,

@@ -39,7 +39,7 @@ class LibrariesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_libraries_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/libraries/",
             params=params,
@@ -55,7 +55,7 @@ class LibrariesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_libraries_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/libraries/{id}/",
             **kwargs,

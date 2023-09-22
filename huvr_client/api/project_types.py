@@ -39,7 +39,7 @@ class ProjectTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_project-types_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/project-types/",
             params=params,
@@ -56,7 +56,7 @@ class ProjectTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_project-types_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/project-types/",
             json=json,
@@ -72,7 +72,7 @@ class ProjectTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_project-types_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/project-types/{id}/",
             **kwargs,
@@ -89,7 +89,7 @@ class ProjectTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_project-types_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/project-types/{id}/",
             json=json,
@@ -107,7 +107,7 @@ class ProjectTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_project-types_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/project-types/{id}/",
             json=json,
@@ -120,7 +120,7 @@ class ProjectTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_project-types_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/project-types/{id}/",
             **kwargs,

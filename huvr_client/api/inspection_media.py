@@ -56,7 +56,7 @@ class InspectionMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/inspection-media/",
             params=params,
@@ -76,7 +76,7 @@ class InspectionMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/inspection-media/",
             json=json,
@@ -89,7 +89,7 @@ class InspectionMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/inspection-media/bulk-delete/",
             json=json,
@@ -102,7 +102,7 @@ class InspectionMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media_edit
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/inspection-media/bulk-edit/",
             json=json,
@@ -115,7 +115,7 @@ class InspectionMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/inspection-media/{id}/",
             **kwargs,
@@ -129,7 +129,7 @@ class InspectionMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/inspection-media/{id}/",
             json=json,
@@ -144,7 +144,7 @@ class InspectionMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/inspection-media/{id}/",
             json=json,
@@ -155,7 +155,7 @@ class InspectionMediaApiModule(BaseApiModule):
         """
         https://docs.huvrdata.app/reference/api_inspection-media_delete_alt
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/inspection-media/{id}/",
             **kwargs,

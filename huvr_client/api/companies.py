@@ -39,7 +39,7 @@ class CompaniesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_companies_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/companies/",
             params=params,
@@ -57,7 +57,7 @@ class CompaniesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_companies_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/companies/",
             json=json,
@@ -73,7 +73,7 @@ class CompaniesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_companies_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/companies/{id}/",
             **kwargs,
@@ -89,7 +89,7 @@ class CompaniesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_companies_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/companies/{id}/",
             json=json,
@@ -107,7 +107,7 @@ class CompaniesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_companies_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/companies/{id}/",
             json=json,
@@ -120,7 +120,7 @@ class CompaniesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_companies_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/companies/{id}/",
             **kwargs,

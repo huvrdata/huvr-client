@@ -54,7 +54,7 @@ class AssessmentsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assessments_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/assessments/",
             params=params,
@@ -70,7 +70,7 @@ class AssessmentsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assessments_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/assessments/{id}/",
             **kwargs,
@@ -84,7 +84,7 @@ class AssessmentsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assessments_revision
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/assessments/{id}/revision/",
             json=json,

@@ -47,7 +47,7 @@ class HeatDataApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_heat-data_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/heat-data/",
             params=params,
@@ -63,7 +63,7 @@ class HeatDataApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_heat-data_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/heat-data/{id}/",
             **kwargs,

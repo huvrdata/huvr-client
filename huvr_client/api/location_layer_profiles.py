@@ -36,7 +36,7 @@ class LocationLayerProfilesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_location-layer-profiles_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/location-layer-profiles/",
             params=params,
@@ -54,7 +54,7 @@ class LocationLayerProfilesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_location-layer-profiles_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/location-layer-profiles/",
             json=json,
@@ -70,7 +70,7 @@ class LocationLayerProfilesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_location-layer-profiles_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/location-layer-profiles/{id}/",
             **kwargs,
@@ -87,7 +87,7 @@ class LocationLayerProfilesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_location-layer-profiles_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/location-layer-profiles/{id}/",
             json=json,
@@ -105,7 +105,7 @@ class LocationLayerProfilesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_location-layer-profiles_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/location-layer-profiles/{id}/",
             json=json,
@@ -118,7 +118,7 @@ class LocationLayerProfilesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_location-layer-profiles_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/location-layer-profiles/{id}/",
             **kwargs,
