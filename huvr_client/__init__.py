@@ -4,9 +4,11 @@ from .__version__ import __copyright__  # noqa
 
 
 from .client import HuvrClient, get_huvr_client
-
+from .media import upload_inspection_media, download_inspection_media
 
 __all__ = [
     "HuvrClient",
     "get_huvr_client",
+    "upload_inspection_media",
+    "download_inspection_media",
 ]
