@@ -54,15 +54,12 @@ _for full list of available filters - see [API docs](https://docs.huvrdata.app)_
 will receive a standard python `requests.Response` object
 
 ```py
-response = client.projects.list(params={
+pagination_data = client.projects.list(params={
     "asset_search": "my-site/my-asset"
 })
 
-# requests.Response object
-response.raise_for_status()  # confirm successful request
-
 # some responses will contain pagination info {next, previous, count, results}
-projects = response.json()["results"]
+projects = pagination_data["results"]
 
 # result data will be raw python dicts/lists etc
 for project in projects:
@@ -76,17 +73,13 @@ pass `json` to request when creating/updating data
 _for full list of expected json data - see [API docs](https://docs.huvrdata.app)_
 
 ```py
-response = client.projects.create(json={
+project = client.projects.create(json={
     "name": "My Project",
     "asset": 24,  # asset id
     "type": 36,  # project type id
 })
 
-# requests.Response object
-response.raise_for_status()  # confirm successful request
-
 # result data will be raw python dicts/lists etc
-project = response.json()
 print(project["id"])
 ```
 

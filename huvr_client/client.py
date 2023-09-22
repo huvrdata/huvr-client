@@ -1,4 +1,6 @@
 import requests
+import json
+from typing import Union, List, Dict
 
 # !! be sure to keep this up to date after regenerating !!
 
@@ -32,6 +34,8 @@ from .api.recommended_work_plans import RecommendedWorkPlansApiModule
 from .api.reservations import ReservationsApiModule
 from .api.schedules import SchedulesApiModule
 from .api.users import UsersApiModule
+
+from .exceptions import HuvrApiError, HuvrApiAuthError, HuvrJSONResponseError, HuvrApiRequestError
 
 
 class HuvrClient:
@@ -93,14 +97,67 @@ class HuvrClient:
         self.schedules = SchedulesApiModule(self)
         self.users = UsersApiModule(self)
 
-    def request(self, method: str, path: str, **kwargs) -> "requests.Response":
-        url = self.base_url + path
+    def request(
+        self,
+        method: str,
+        path: str,
+        **kwargs
+    ) -> "Union[requests.Response, List, Dict]":
+        """
+        Make a JSON request to the HUVR API.
 
+        :param method: The HTTP method to use.
+        :param path: The path to the endpoint.
+        :param kwargs: Additional keyword arguments to pass to the request.
+        """
         headers = {
             "Content-Type": "application/json",
             "Accept": "application/json",
             **kwargs.pop("headers", {}),
         }
+
+        response = self.request_raw(method, path, headers=headers, **kwargs)
+
+        # check for errors
+        try:
+            response.raise_for_status()
+        except requests.HTTPError as e:
+            if response.status_code > 500:
+                raise HuvrApiError(f"Server Error: {response.content}", response=response) from e
+            elif response.status_code == 401:
+                raise HuvrApiAuthError(f"Authentication Error: {response.content}", response=response) from e
+            elif response.status_code > 400:
+                raise HuvrApiRequestError(f"Request Error: {response.content}", response=response) from e
+            else:
+                raise HuvrApiError(f"Unknown Error: {response.content}", response=response) from e
+
+        # cast to json
+        try:
+            data = response.json()
+        except json.JSONDecodeError as e:
+            raise HuvrJSONResponseError(
+                f"Invalid JSON Response (hint, pass `return_raw_response=True` if json not expected): {response.content}",
+                response=response) from e
+
+        return data
+
+    def request_raw(
+        self,
+        method: str,
+        path: str,
+        **kwargs
+    ) -> "requests.Response":
+        """
+        Make a request to the HUVR API.
+
+        hint - use `request` instead of this method, unless you expect a non-json response.
+
+        :param method: The HTTP method to use.
+        :param path: The path to the endpoint.
+        :param kwargs: Additional keyword arguments to pass to the request.
+        """
+
+        url = self.base_url + path
 
         if self.verbose:
             print(
@@ -108,7 +165,6 @@ class HuvrClient:
                     method,
                     url,
                     {
-                        "headers": headers,
                         **kwargs,
                     },
                 )
@@ -117,7 +173,6 @@ class HuvrClient:
         return self.session.request(
             method,
             url,
-            headers=headers,
             **kwargs,
         )
 
@@ -129,14 +184,12 @@ class HuvrClient:
 
         https://docs.huvrdata.app/docs/authentication
         """
-        response = self.auth.obtain_access_token_create(
+        data = self.auth.obtain_access_token_create(
             json={
                 "client_id": client_id,
                 "client_secret": client_secret,
             }
         )
-        response.raise_for_status()
-        data = response.json()
         self.session.headers["Authorization"] = f"Token {data['access_token']}"
 
 

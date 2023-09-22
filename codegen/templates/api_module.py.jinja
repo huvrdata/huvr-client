@@ -17,7 +17,7 @@ class {{ class_name }}ApiModule(BaseApiModule):
         """
         {{ endpoint.docstring }}
         """
-        return self.client.request(
+        return self.client.request_json(
             method="{{ endpoint.method }}",
             path=f"{{ endpoint.path }}",{% if endpoint.has_body %}
             json=json,{% endif %}{% if endpoint.has_query_params %}
