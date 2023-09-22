@@ -140,15 +140,18 @@ class HuvrClient:
         self.session.headers["Authorization"] = f"Token {data['access_token']}"
 
 
-def get_huvr_client(base_url: str, client_id: str, client_secret: str) -> "HuvrClient":
+def get_huvr_client(base_url: str, client_id: str = None, client_secret: str = None) -> "HuvrClient":
     """
     Get an authenticated HUVR client.
 
     :param base_url: The base URL for the HUVR API. ex: https://demo.huvrdata.com
     :param client_id: The client ID for the HUVR API.
+        optional - if passed will authenticate the client.
     :param client_secret: The client secret for the HUVR API.
+        optional - must include client_id if passed.
     :return: An authenticated HUVR client.
     """
     client = HuvrClient(base_url)
-    client.authenticate(client_id, client_secret)
+    if client_id:
+        client.authenticate(client_id, client_secret)
     return client
