@@ -42,7 +42,7 @@ class ChecklistTasksApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-tasks_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/checklist-tasks/",
             params=params,
@@ -60,7 +60,7 @@ class ChecklistTasksApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-tasks_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/checklist-tasks/",
             json=json,
@@ -76,7 +76,7 @@ class ChecklistTasksApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-tasks_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/checklist-tasks/{id}/",
             **kwargs,
@@ -93,7 +93,7 @@ class ChecklistTasksApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-tasks_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/checklist-tasks/{id}/",
             json=json,
@@ -111,7 +111,7 @@ class ChecklistTasksApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-tasks_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/checklist-tasks/{id}/",
             json=json,
@@ -124,7 +124,7 @@ class ChecklistTasksApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-tasks_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/checklist-tasks/{id}/",
             **kwargs,

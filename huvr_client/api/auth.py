@@ -21,7 +21,7 @@ class AuthApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_auth_obtain-access-token_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/auth/obtain-access-token/",
             json=json,
@@ -36,7 +36,7 @@ class AuthApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_auth_session-login_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/auth/session-login/",
             **kwargs,
@@ -48,7 +48,7 @@ class AuthApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_auth_session-logout_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/auth/session-logout/",
             **kwargs,

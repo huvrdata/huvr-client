@@ -53,7 +53,7 @@ class ChecklistsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklists_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/checklists/",
             params=params,
@@ -71,7 +71,7 @@ class ChecklistsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklists_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/checklists/",
             json=json,
@@ -87,7 +87,7 @@ class ChecklistsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklists_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/checklists/{id}/",
             **kwargs,
@@ -103,7 +103,7 @@ class ChecklistsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklists_edit
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/checklists/{id}/edit/",
             json=json,
@@ -120,7 +120,7 @@ class ChecklistsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklists_revisions_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/checklists/{id}/revisions/",
             **kwargs,
@@ -136,7 +136,7 @@ class ChecklistsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklists_revisions_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/checklists/{id}/revisions/",
             json=json,
@@ -153,7 +153,7 @@ class ChecklistsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media_overlays_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/inspection-media/{id}/overlays/",
             json=json,
@@ -170,7 +170,7 @@ class ChecklistsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media_overlays_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/inspection-media/{id}/overlays/",
             json=json,

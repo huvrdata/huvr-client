@@ -66,7 +66,7 @@ class DefectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defects_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/defects/",
             params=params,
@@ -81,7 +81,7 @@ class DefectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defects_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/defects/",
             json=json,
@@ -94,7 +94,7 @@ class DefectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defects_edit
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/defects/bulk-edit/",
             json=json,
@@ -147,7 +147,7 @@ class DefectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defects_filters
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/defects/filters/",
             params=params,
@@ -169,7 +169,7 @@ class DefectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defects_link
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/defects/link/",
             json=json,
@@ -182,7 +182,7 @@ class DefectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defects_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/defects/{id}/",
             **kwargs,
@@ -196,7 +196,7 @@ class DefectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defects_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/defects/{id}/",
             json=json,
@@ -211,7 +211,7 @@ class DefectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_defects_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/defects/{id}/",
             json=json,
@@ -222,7 +222,7 @@ class DefectsApiModule(BaseApiModule):
         """
         https://docs.huvrdata.app/reference/api_defects_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/defects/{id}/",
             **kwargs,

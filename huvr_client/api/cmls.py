@@ -50,7 +50,7 @@ class CmlsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_cmls_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/cmls/",
             params=params,
@@ -67,7 +67,7 @@ class CmlsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_cmls_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/cmls/",
             json=json,
@@ -80,7 +80,7 @@ class CmlsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_cmls_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/cmls/{id}/",
             **kwargs,
@@ -94,7 +94,7 @@ class CmlsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_cmls_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/cmls/{id}/",
             json=json,
@@ -109,7 +109,7 @@ class CmlsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_cmls_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/cmls/{id}/",
             json=json,
@@ -120,7 +120,7 @@ class CmlsApiModule(BaseApiModule):
         """
         https://docs.huvrdata.app/reference/api_cmls_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/cmls/{id}/",
             **kwargs,

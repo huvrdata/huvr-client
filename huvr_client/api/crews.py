@@ -40,7 +40,7 @@ class CrewsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_crews_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/crews/",
             params=params,
@@ -57,7 +57,7 @@ class CrewsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_crews_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/crews/",
             json=json,
@@ -73,7 +73,7 @@ class CrewsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_crews_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/crews/{id}/",
             **kwargs,
@@ -89,7 +89,7 @@ class CrewsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_crews_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/crews/{id}/",
             json=json,
@@ -107,7 +107,7 @@ class CrewsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_crews_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/crews/{id}/",
             json=json,
@@ -120,7 +120,7 @@ class CrewsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_crews_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/crews/{id}/",
             **kwargs,

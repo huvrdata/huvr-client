@@ -88,7 +88,7 @@ if requesting a non-json or "internal" endpoint, can make a raw request.
 this will return a standard python `requests.Response` object
 
 ```py
-response = client.request_raw(
+response = client.request(
     method="GET",
     path="/api/.../",
     # params={...},

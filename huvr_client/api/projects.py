@@ -66,7 +66,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/projects/",
             params=params,
@@ -83,7 +83,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/projects/",
             json=json,
@@ -99,7 +99,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/projects/bulk-delete/",
             json=json,
@@ -115,7 +115,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_edit
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/projects/bulk-edit/",
             json=json,
@@ -132,7 +132,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_bulk_share
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/projects/bulk-share/",
             json=json,
@@ -182,7 +182,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_counts_by_status
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/projects/counts-by-status/",
             params=params,
@@ -249,7 +249,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_list_detailed
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/projects/detailed/",
             params=params,
@@ -265,7 +265,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/projects/{id}/",
             **kwargs,
@@ -281,7 +281,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/projects/{id}/",
             json=json,
@@ -299,7 +299,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/projects/{id}/",
             json=json,
@@ -312,7 +312,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_delete_alt
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/projects/{id}/",
             **kwargs,
@@ -328,7 +328,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_asset-condition_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/projects/{id}/asset-condition/",
             **kwargs,
@@ -344,7 +344,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_asset-condition_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/projects/{id}/asset-condition/",
             json=json,
@@ -361,7 +361,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_asset-condition_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/projects/{id}/asset-condition/",
             json=json,
@@ -376,7 +376,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_export
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/projects/{id}/export/",
             **kwargs,
@@ -390,7 +390,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_location_summary
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/projects/{id}/location-summary/",
             **kwargs,
@@ -406,7 +406,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_status_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/projects/{id}/status/",
             **kwargs,
@@ -422,7 +422,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_status_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/projects/{id}/status/",
             json=json,
@@ -439,7 +439,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_status_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/projects/{id}/status/",
             json=json,
@@ -456,7 +456,7 @@ class ProjectsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_projects_watch
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/projects/{id}/watch/",
             json=json,

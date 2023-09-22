@@ -67,7 +67,7 @@ class AssetsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assets_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/assets/",
             params=params,
@@ -84,7 +84,7 @@ class AssetsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assets_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/assets/",
             json=json,
@@ -137,7 +137,7 @@ class AssetsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assets_asset_condition_map
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/assets/asset-condition-map/",
             params=params,
@@ -187,7 +187,7 @@ class AssetsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assets_filters
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/assets/filters/",
             params=params,
@@ -256,7 +256,7 @@ class AssetsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assets_tree
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/assets/tree/",
             params=params,
@@ -272,7 +272,7 @@ class AssetsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assets_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/assets/{id}/",
             **kwargs,
@@ -288,7 +288,7 @@ class AssetsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assets_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/assets/{id}/",
             json=json,
@@ -306,7 +306,7 @@ class AssetsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assets_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/assets/{id}/",
             json=json,
@@ -319,7 +319,7 @@ class AssetsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assets_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/assets/{id}/",
             **kwargs,

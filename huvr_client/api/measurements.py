@@ -41,7 +41,7 @@ class MeasurementsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_measurements_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/measurements/",
             params=params,
@@ -58,7 +58,7 @@ class MeasurementsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_measurements_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/measurements/",
             json=json,
@@ -71,7 +71,7 @@ class MeasurementsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_measurements_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/measurements/bulk-delete/",
             json=json,
@@ -90,7 +90,7 @@ class MeasurementsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_measurements_import_measurements
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/measurements/import/",
             json=json,
@@ -103,7 +103,7 @@ class MeasurementsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_measurements_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/measurements/{id}/",
             **kwargs,
@@ -117,7 +117,7 @@ class MeasurementsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_measurements_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/measurements/{id}/",
             json=json,
@@ -132,7 +132,7 @@ class MeasurementsApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_measurements_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/measurements/{id}/",
             json=json,
@@ -143,7 +143,7 @@ class MeasurementsApiModule(BaseApiModule):
         """
         https://docs.huvrdata.app/reference/api_measurements_delete_alt
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/measurements/{id}/",
             **kwargs,

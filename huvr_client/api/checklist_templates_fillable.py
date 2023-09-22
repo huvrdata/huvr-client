@@ -42,7 +42,7 @@ class ChecklistTemplatesFillableApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-templates-fillable_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/checklist-templates-fillable/",
             params=params,
@@ -58,7 +58,7 @@ class ChecklistTemplatesFillableApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_checklist-templates-fillable_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/checklist-templates-fillable/{id}/",
             **kwargs,

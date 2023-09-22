@@ -36,7 +36,7 @@ class AssessmentTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assessment-types_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/assessment-types/",
             params=params,
@@ -52,7 +52,7 @@ class AssessmentTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_assessment-types_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/assessment-types/{id}/",
             **kwargs,

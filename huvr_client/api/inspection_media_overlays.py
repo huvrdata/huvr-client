@@ -34,7 +34,7 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/inspection-media-overlays/",
             params=params,
@@ -52,7 +52,7 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/inspection-media-overlays/",
             json=json,
@@ -65,7 +65,7 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/inspection-media-overlays/{id}/",
             **kwargs,
@@ -79,7 +79,7 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/inspection-media-overlays/{id}/",
             json=json,
@@ -94,7 +94,7 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/inspection-media-overlays/{id}/",
             json=json,
@@ -105,7 +105,7 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
         """
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/inspection-media-overlays/{id}/",
             **kwargs,

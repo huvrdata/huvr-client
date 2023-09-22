@@ -47,7 +47,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_events_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/schedule/events/",
             params=params,
@@ -62,7 +62,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_events_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/schedule/events/",
             json=json,
@@ -78,7 +78,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_events_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/schedule/events/{id}/",
             **kwargs,
@@ -92,7 +92,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_events_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/schedule/events/{id}/",
             json=json,
@@ -107,7 +107,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_events_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/schedule/events/{id}/",
             json=json,
@@ -118,7 +118,7 @@ class SchedulesApiModule(BaseApiModule):
         """
         https://docs.huvrdata.app/reference/api_schedule_events_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/schedule/events/{id}/",
             **kwargs,
@@ -155,7 +155,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plan-work_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/schedule/plan-work/",
             params=params,
@@ -173,7 +173,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plan-work_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/schedule/plan-work/",
             json=json,
@@ -189,7 +189,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plan-work_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/schedule/plan-work/{id}/",
             **kwargs,
@@ -205,7 +205,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plan-work_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/schedule/plan-work/{id}/",
             json=json,
@@ -223,7 +223,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plan-work_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/schedule/plan-work/{id}/",
             json=json,
@@ -236,7 +236,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plan-work_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/schedule/plan-work/{id}/",
             **kwargs,
@@ -273,7 +273,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plans_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/schedule/plans/",
             params=params,
@@ -291,7 +291,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plans_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/schedule/plans/",
             json=json,
@@ -307,7 +307,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plans_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/schedule/plans/{id}/",
             **kwargs,
@@ -323,7 +323,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plans_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/schedule/plans/{id}/",
             json=json,
@@ -341,7 +341,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plans_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/schedule/plans/{id}/",
             json=json,
@@ -354,7 +354,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plans_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/schedule/plans/{id}/",
             **kwargs,
@@ -370,7 +370,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plans_generate-events_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/schedule/plans/{id}/generate-events/",
             json=json,
@@ -387,7 +387,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_plans_generate-events_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/schedule/plans/{id}/generate-events/",
             json=json,
@@ -428,7 +428,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_tasks_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/schedule/tasks/",
             params=params,
@@ -444,7 +444,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_tasks_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/schedule/tasks/{id}/",
             **kwargs,
@@ -458,7 +458,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_tasks_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/schedule/tasks/{id}/",
             json=json,
@@ -473,7 +473,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_tasks_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/schedule/tasks/{id}/delete/",
             json=json,
@@ -490,7 +490,7 @@ class SchedulesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_schedule_tasks_reconcile
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/schedule/tasks/{id}/reconcile/",
             json=json,

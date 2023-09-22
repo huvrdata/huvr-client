@@ -38,7 +38,7 @@ class AssetTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_asset-types_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/asset-types/",
             params=params,
@@ -56,7 +56,7 @@ class AssetTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_asset-types_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/asset-types/",
             json=json,
@@ -72,7 +72,7 @@ class AssetTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_asset-types_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/asset-types/{id}/",
             **kwargs,
@@ -88,7 +88,7 @@ class AssetTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_asset-types_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/asset-types/{id}/",
             json=json,
@@ -106,7 +106,7 @@ class AssetTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_asset-types_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/asset-types/{id}/",
             json=json,
@@ -119,7 +119,7 @@ class AssetTypesApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_asset-types_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/asset-types/{id}/",
             **kwargs,

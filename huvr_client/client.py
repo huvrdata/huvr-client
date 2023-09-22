@@ -102,7 +102,7 @@ class HuvrClient:
         self.schedules = SchedulesApiModule(self)
         self.users = UsersApiModule(self)
 
-    def request(
+    def request_json(
         self, method: str, path: str, **kwargs
     ) -> "Union[requests.Response, List, Dict]":
         """
@@ -118,7 +118,7 @@ class HuvrClient:
             **kwargs.pop("headers", {}),
         }
 
-        response = self.request_raw(method, path, headers=headers, **kwargs)
+        response = self.request(method, path, headers=headers, **kwargs)
 
         # check for errors
         try:
@@ -152,7 +152,7 @@ class HuvrClient:
 
         return data
 
-    def request_raw(self, method: str, path: str, **kwargs) -> "requests.Response":
+    def request(self, method: str, path: str, **kwargs) -> "requests.Response":
         """
         Make a request to the HUVR API.
 

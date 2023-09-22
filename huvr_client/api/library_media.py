@@ -40,7 +40,7 @@ class LibraryMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_library-media_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/library-media/",
             params=params,
@@ -60,7 +60,7 @@ class LibraryMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_library-media_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/library-media/",
             json=json,
@@ -84,7 +84,7 @@ class LibraryMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_library-media_summary
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/library-media/summary/",
             params=params,
@@ -100,7 +100,7 @@ class LibraryMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_library-media_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/library-media/{id}/",
             **kwargs,
@@ -117,7 +117,7 @@ class LibraryMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_library-media_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/library-media/{id}/",
             json=json,
@@ -135,7 +135,7 @@ class LibraryMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_library-media_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/library-media/{id}/",
             json=json,
@@ -148,7 +148,7 @@ class LibraryMediaApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_library-media_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/library-media/{id}/",
             **kwargs,

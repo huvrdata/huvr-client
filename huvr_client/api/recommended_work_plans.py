@@ -47,7 +47,7 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_recommended-work-plans_list
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/recommended-work-plans/",
             params=params,
@@ -65,7 +65,7 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_recommended-work-plans_create
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/recommended-work-plans/",
             json=json,
@@ -83,7 +83,7 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_recommended-work-plans_bulk_edit
         """
-        return self.client.request(
+        return self.client.request_json(
             method="post",
             path=f"/api/recommended-work-plans/bulk-edit/",
             json=json,
@@ -98,7 +98,7 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_recommended-work-plans_read
         """
-        return self.client.request(
+        return self.client.request_json(
             method="get",
             path=f"/api/recommended-work-plans/{id}/",
             **kwargs,
@@ -115,7 +115,7 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_recommended-work-plans_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="put",
             path=f"/api/recommended-work-plans/{id}/",
             json=json,
@@ -133,7 +133,7 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_recommended-work-plans_partial_update
         """
-        return self.client.request(
+        return self.client.request_json(
             method="patch",
             path=f"/api/recommended-work-plans/{id}/",
             json=json,
@@ -147,7 +147,7 @@ class RecommendedWorkPlansApiModule(BaseApiModule):
 
         https://docs.huvrdata.app/reference/api_recommended-work-plans_delete
         """
-        return self.client.request(
+        return self.client.request_json(
             method="delete",
             path=f"/api/recommended-work-plans/{id}/",
             **kwargs,
