@@ -24,13 +24,17 @@ class TestClient(unittest.TestCase):
         dirname = os.path.dirname(os.path.abspath(__file__))
 
         client = get_huvr_client(BASE_URL, CLIENT_ID, CLIENT_SECRET, verbose=True)
-        media = upload_inspection_media(client, filepath=os.path.join(dirname, "image.png"))
+        media = upload_inspection_media(
+            client, filepath=os.path.join(dirname, "image.png")
+        )
 
         self.assertEqual(media["name"], "image.png")
 
         # delete file if it exists in "tmp" directory
         if os.path.exists(os.path.join(dirname, "tmp", "image.png")):
             os.remove(os.path.join(dirname, "tmp", "image.png"))
-        download_inspection_media(client, media["id"], directory=os.path.join(dirname, "tmp"))
+        download_inspection_media(
+            client, media["id"], directory=os.path.join(dirname, "tmp")
+        )
 
         self.assertTrue(os.path.exists(os.path.join(dirname, "tmp", "image.png")))

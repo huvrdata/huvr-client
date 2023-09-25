@@ -11,20 +11,19 @@ if TYPE_CHECKING:
 def upload_inspection_media(
     client: "HuvrClient",
     filepath: str,
-    project_id: int = None,
-    checklist_id: int = None,
-    checklist_line_id: str = None,
+    project: int = None,
+    checklist: int = None,
+    **payload_kwargs,
 ):
     """
     Uploads a file to the HUVR API.
 
     :param client: The HUVR client.
     :param filepath: The path to the file to upload.
-    :param project_id: The project ID to associate the file with. (optional)
-    :param checklist_id: The checklist (form) ID to associate the file with. (optional)
-    :param checklist_line_id: The checklist line ID to associate the file with. (optional)
-        format: "{checklist_id}-{section_key}-{line_key}"
-
+    :param project: The project ID to associate the file with. (optional)
+    :param checklist: The checklist (form) ID to associate the file with. (optional)
+    :param payload_kwargs: Additional keyword arguments to pass to the payload.
+        see accepted values https://docs.huvrdata.app/reference/api_inspection-media_create
     :raises requests.HTTPError: If the upload fails.
     """
 
@@ -33,9 +32,9 @@ def upload_inspection_media(
     payload = {
         "filename": filename,
         "file_meta": {"relative_path": filepath},
-        "project": project_id,
-        "checklist": checklist_id,
-        "attached_to": [checklist_line_id] if checklist_line_id else [],
+        "project": project,
+        "checklist": checklist,
+        **payload_kwargs,
     }
 
     # create the media record on HUVR
@@ -48,6 +47,7 @@ def upload_inspection_media(
 
     with open(filepath, "rb") as file:
         upload_response = requests.put(signed_url, data=file, headers=upload_headers)
+        # TODO - should be able to retry upload if it fails
         upload_response.raise_for_status()
 
     return inspection_media
@@ -57,6 +57,7 @@ def download_inspection_media(
     client: "HuvrClient",
     media_id: int,
     directory: str = ".",
+    overwrite: bool = False,
 ):
     """
     Downloads a file from the HUVR API.
@@ -64,6 +65,7 @@ def download_inspection_media(
     :param client: The HUVR client.
     :param media_id: The ID of the file to download.
     :param directory: The directory to save the file to. (defaults to current directory)
+    :param overwrite: Whether to overwrite the file if it already exists. (defaults to False)
     """
 
     # get the media record from HUVR
@@ -77,7 +79,7 @@ def download_inspection_media(
     response = requests.get(signed_url)
     filename = inspection_media["name"]
     filepath = os.path.join(directory, filename)
-    if os.path.exists(filepath):
+    if os.path.exists(filepath) and not overwrite:
         #   prevent overwriting files with the same name
         filename, extension = filename.split(".")
         filename = f"{filename}-{uuid.uuid4()}.{extension}"
