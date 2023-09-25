@@ -200,7 +200,7 @@ class HuvrClient:
 
 
 def get_huvr_client(
-    base_url: str, client_id: str = None, client_secret: str = None
+    base_url: str, client_id: str = None, client_secret: str = None, **kwargs
 ) -> "HuvrClient":
     """
     Get an authenticated HUVR client.
@@ -210,9 +210,10 @@ def get_huvr_client(
         optional - if passed will authenticate the client.
     :param client_secret: The client secret for the HUVR API.
         optional - must include client_id if passed.
+    :param kwargs: Additional keyword arguments to pass to the HuvrClient constructor.
     :return: An authenticated HUVR client.
     """
-    client = HuvrClient(base_url)
+    client = HuvrClient(base_url, **kwargs)
     if client_id:
         client.authenticate(client_id, client_secret)
     return client
