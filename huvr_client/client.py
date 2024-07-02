@@ -68,6 +68,7 @@ class HuvrClient:
 
         self.verbose = verbose
         self.session = requests.Session()
+        self.session.headers["User-Agent"] = "huvr_client/0.3.7 python"
 
         # modules
         #
