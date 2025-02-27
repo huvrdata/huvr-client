@@ -10,8 +10,15 @@ class ProjectsApiModule(BaseApiModule):
         """
         Returns an array projects.
 
-        :param dict params: asset: string
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
+        :param dict params: app_key: string
+        asset: string
         asset__asset_path_cache__path: string
+        asset__owner__id: string
+        asset__owner__name: string
         asset__type__in: string
         asset_condition: string
         asset_condition__in: string
@@ -25,6 +32,7 @@ class ProjectsApiModule(BaseApiModule):
         descendants: string
         end: string
         event: string
+        external_id: string
         limit: integer
         management_company__in: string
         management_company__name: string
@@ -38,6 +46,7 @@ class ProjectsApiModule(BaseApiModule):
         search: string
         start: string
         status: string
+        tasks: string
         type: string
         type__in: string
         type__name: string
@@ -77,6 +86,11 @@ class ProjectsApiModule(BaseApiModule):
         """
         accept a flat object for create, return nested detail object
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::project_create
+
         :param dict json: $ref: '#/components/requestBodies/ProjectCreate'
 
         :returns: $ref: '#/components/schemas/ProjectDetail'
@@ -95,6 +109,11 @@ class ProjectsApiModule(BaseApiModule):
         View projects
 
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::project_delete
+
         :param dict json: $ref: '#/components/requestBodies/ProjectDetail'
 
         https://docs.huvrdata.app/reference/api_projects_delete
@@ -111,6 +130,11 @@ class ProjectsApiModule(BaseApiModule):
         View projects
 
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::project_edit
+
         :param dict json: $ref: '#/components/requestBodies/ProjectDetail'
 
         https://docs.huvrdata.app/reference/api_projects_edit
@@ -125,6 +149,10 @@ class ProjectsApiModule(BaseApiModule):
     def bulk_share(self, json=None, **kwargs):
         """
         allow for bulk assignment/unassignment of multiple users to multiple projects
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :param dict json: $ref: '#/components/schemas/ProjectBulkShare'
 
@@ -144,8 +172,15 @@ class ProjectsApiModule(BaseApiModule):
         View projects
 
 
-        :param dict params: asset: string
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
+        :param dict params: app_key: string
+        asset: string
         asset__asset_path_cache__path: string
+        asset__owner__id: string
+        asset__owner__name: string
         asset__type__in: string
         asset_condition: string
         asset_condition__in: string
@@ -159,6 +194,7 @@ class ProjectsApiModule(BaseApiModule):
         descendants: string
         end: string
         event: string
+        external_id: string
         limit: integer
         management_company__in: string
         management_company__name: string
@@ -172,6 +208,7 @@ class ProjectsApiModule(BaseApiModule):
         search: string
         start: string
         status: string
+        tasks: string
         type: string
         type__in: string
         type__name: string
@@ -193,8 +230,15 @@ class ProjectsApiModule(BaseApiModule):
         """
         Shows a detailed list or projects (slow).
 
-        :param dict params: asset: string
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
+        :param dict params: app_key: string
+        asset: string
         asset__asset_path_cache__path: string
+        asset__owner__id: string
+        asset__owner__name: string
         asset__type__in: string
         asset_condition: string
         asset_condition__in: string
@@ -208,6 +252,7 @@ class ProjectsApiModule(BaseApiModule):
         descendants: string
         end: string
         event: string
+        external_id: string
         limit: integer
         management_company__in: string
         management_company__name: string
@@ -221,6 +266,7 @@ class ProjectsApiModule(BaseApiModule):
         search: string
         start: string
         status: string
+        tasks: string
         type: string
         type__in: string
         type__name: string
@@ -256,10 +302,36 @@ class ProjectsApiModule(BaseApiModule):
             **kwargs,
         )
 
+    def status_bulk_update(self, json=None, **kwargs):
+        """
+        Updates multiple project's status at once.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::project_status_edit
+
+        :param dict json: $ref: '#/components/schemas/ProjectStatusBulkUpdate'
+
+        :returns: $ref: '#/components/schemas/ProjectStatusBulkUpdate'
+
+        https://docs.huvrdata.app/reference/api_projects_status_bulk_update
+        """
+        return self.client.request_json(
+            method="post",
+            path=f"/api/projects/status/",
+            json=json,
+            **kwargs,
+        )
+
     def read(self, id, **kwargs):
         """
         Return the specific project
         :params id Project ID
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :returns: $ref: '#/components/schemas/ProjectDetail'
 
@@ -273,7 +345,12 @@ class ProjectsApiModule(BaseApiModule):
 
     def update(self, id, json=None, **kwargs):
         """
-        Project update. work_done_on is ignored if 'historical_project' is true
+        Project update.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::project_edit
 
         :param dict json: $ref: '#/components/requestBodies/ProjectCreate'
 
@@ -293,6 +370,11 @@ class ProjectsApiModule(BaseApiModule):
         View projects
 
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::project_edit
+
         :param dict json: $ref: '#/components/requestBodies/ProjectCreate'
 
         :returns: $ref: '#/components/schemas/ProjectCreate'
@@ -310,6 +392,12 @@ class ProjectsApiModule(BaseApiModule):
         """
         View projects
 
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::project_delete
+
         https://docs.huvrdata.app/reference/api_projects_delete_alt
         """
         return self.client.request_json(
@@ -321,6 +409,11 @@ class ProjectsApiModule(BaseApiModule):
     def asset_condition_read(self, id, **kwargs):
         """
         Set the project asset condition, allow retrival of the project asset condition history
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::project_edit
 
         :returns: items:
           $ref: '#/components/schemas/AssetConditionHistoryInline'
@@ -338,6 +431,11 @@ class ProjectsApiModule(BaseApiModule):
         """
         Set the project asset condition, allow retrival of the project asset condition history
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::project_edit
+
         :param dict json: $ref: '#/components/schemas/AssetConditionChange'
 
         :returns: $ref: '#/components/schemas/AssetConditionHistoryInline'
@@ -354,6 +452,11 @@ class ProjectsApiModule(BaseApiModule):
     def asset_condition_update(self, id, json=None, **kwargs):
         """
         Set the project asset condition, allow retrival of the project asset condition history
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::project_edit
 
         :param dict json: $ref: '#/components/requestBodies/ProjectDetail'
 
@@ -374,6 +477,10 @@ class ProjectsApiModule(BaseApiModule):
         This is a simple helper API endpoint that is run by developers only
         as this process will probably (depending on data) outgrow an inline request.
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         https://docs.huvrdata.app/reference/api_projects_export
         """
         return self.client.request_json(
@@ -385,6 +492,10 @@ class ProjectsApiModule(BaseApiModule):
     def location_summary(self, id, **kwargs):
         """
         Location summary of the findings/defects for a given project
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :returns: $ref: '#/components/schemas/ProjectDetail'
 
@@ -399,6 +510,11 @@ class ProjectsApiModule(BaseApiModule):
     def status_read(self, id, **kwargs):
         """
         Set the project status, allow retrieval of the project status history
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::project_status_edit
 
         :returns: items:
           $ref: '#/components/schemas/ProjectStatus'
@@ -415,6 +531,11 @@ class ProjectsApiModule(BaseApiModule):
     def status_create(self, id, json=None, **kwargs):
         """
         Set the project status, allow retrieval of the project status history
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::project_status_edit
 
         :param dict json: $ref: '#/components/requestBodies/ProjectStatusEdit'
 
@@ -433,6 +554,11 @@ class ProjectsApiModule(BaseApiModule):
         """
         Set the project status, allow retrieval of the project status history
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::project_status_edit
+
         :param dict json: $ref: '#/components/requestBodies/ProjectStatusEdit'
 
         :returns: $ref: '#/components/schemas/ProjectDetail'
@@ -449,6 +575,10 @@ class ProjectsApiModule(BaseApiModule):
     def watch(self, id, json=None, **kwargs):
         """
         Set the project watchers, allow retrival of the project watchers
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :param dict json: $ref: '#/components/schemas/ProjectShare'
 

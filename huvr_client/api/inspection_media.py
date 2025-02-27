@@ -8,16 +8,25 @@ from .base_api_module import BaseApiModule
 class InspectionMediaApiModule(BaseApiModule):
     def list(self, params=None, **kwargs):
         """
+        Returns an array of Inspection Media objects.
+
+        Required permissions:
+        - (IsAuthenticated AND HasRolePermissions) OR APIKeyRequired
+
         :param dict params: captured_on: string
         checklist: string
+        client_id: string
+        cml: string
         component_display: string
         created_by_me: string
         created_on: string
         defect: string
+        description: string
         document_category: string
         file: string
         geo_point__bounding_box: string
         hidden: string
+        id: string
         limit: integer
         location_code_display: string
         location_zone_display: string
@@ -32,6 +41,7 @@ class InspectionMediaApiModule(BaseApiModule):
         size: string
         size_max: string
         size_min: string
+        source_media: string
         state: string
 
         :returns: properties:
@@ -65,10 +75,26 @@ class InspectionMediaApiModule(BaseApiModule):
 
     def create(self, json=None, **kwargs):
         """
-        create inspection media, the actual media object is hosted on GCS.
-        For larger files, the preferred method is send the data directly storage.
+        For larger files, the preferred method is send the data directly to cloud storage.
+        The response includes a signed url that will allow the client to upload directly to the cloud storage provider. The signed url is only valid for a short period of time.
+        Refreshing the inspection media object will return a new signed url.
 
-        Generate a signed url that will allow the client to upload directly to GCS.
+        Media objects are contained by a project or a checklist instance. The name of the media object is unique within the project or checklist instance.
+
+        If a duplicate name is found, the system will append a number to the end of the name to make it unique. After a few attempts to rename the system will return an error.
+
+        `client_id` is a unique identifier for the media object in the entire workspace. If a media object with the same `client_id` is found, the system will return an error.
+        `client_id` needs to be unique or null.
+
+        After file upload, the system will process the media to:
+        - extracting metadata (GPS, EXIF, etc.)
+        - generating thumbnails and preview images
+        - convert video to a streamable format
+
+        The state is set to `UPLOADED` after the file is uploaded and processed.
+
+        Required permissions:
+        - (IsAuthenticated AND HasRolePermissions) OR APIKeyRequired
 
         :param dict json: $ref: '#/components/schemas/InspectionMediaCreate'
 
@@ -85,6 +111,11 @@ class InspectionMediaApiModule(BaseApiModule):
 
     def delete(self, json=None, **kwargs):
         """
+        Delete multiple Inspection Media objects at once.
+
+        Required permissions:
+        - (IsAuthenticated AND HasRolePermissions) OR APIKeyRequired
+
         :param dict json: $ref: '#/components/requestBodies/InspectionMedia'
 
         https://docs.huvrdata.app/reference/api_inspection-media_delete
@@ -98,7 +129,12 @@ class InspectionMediaApiModule(BaseApiModule):
 
     def edit(self, json=None, **kwargs):
         """
-        :param dict json: $ref: '#/components/requestBodies/InspectionMedia'
+        Allows the same value to be applied to multiple Inspection Media objects at once.
+
+        Required permissions:
+        - (IsAuthenticated AND HasRolePermissions) OR APIKeyRequired
+
+        :param dict json: $ref: '#/components/requestBodies/InspectionMediaUpdate'
 
         https://docs.huvrdata.app/reference/api_inspection-media_edit
         """
@@ -109,8 +145,37 @@ class InspectionMediaApiModule(BaseApiModule):
             **kwargs,
         )
 
+    def process(self, json=None, **kwargs):
+        """
+        Perform processing of InspectionMedia objects. For now only supports
+        decompressing and extracting files from a zip file. The contents of the zip file will be added to the containing project or checklist instance.
+
+        Required permissions:
+        - (IsAuthenticated AND HasRolePermissions) OR APIKeyRequired
+
+        :param dict json: $ref: '#/components/schemas/InspectionMediaProcess'
+
+        :returns: $ref: '#/components/schemas/InspectionMedia'
+
+        https://docs.huvrdata.app/reference/api_inspection-media_process
+        """
+        return self.client.request_json(
+            method="post",
+            path=f"/api/inspection-media/process/",
+            json=json,
+            **kwargs,
+        )
+
     def read(self, id, **kwargs):
         """
+        Return the specific Inspection Media. The media object includes the metadata not the file contents. The file contents are linked to.
+
+        If the file has not been uploaded, the `upload` object includes a signed_url that can be used to upload the file directly to the cloud storage provider.
+        The `upload` object is only valid for a short period of time and can be refreshed by calling `GET` again.
+
+        Required permissions:
+        - (IsAuthenticated AND HasRolePermissions) OR APIKeyRequired
+
         :returns: $ref: '#/components/schemas/InspectionMedia'
 
         https://docs.huvrdata.app/reference/api_inspection-media_read
@@ -123,6 +188,14 @@ class InspectionMediaApiModule(BaseApiModule):
 
     def update(self, id, json=None, **kwargs):
         """
+        Update the inspection media object. This endpoint is used to update the metadata of the media object.
+
+        Once a file is uploaded, the file cannot be updated. If the file needs to be updated, a new media object should be created.
+        The PATCH operation is preferred for updating metadata, only send the fields that have changed.
+
+        Required permissions:
+        - (IsAuthenticated AND HasRolePermissions) OR APIKeyRequired
+
         :param dict json: $ref: '#/components/requestBodies/InspectionMediaUpdate'
 
         :returns: $ref: '#/components/schemas/InspectionMedia'
@@ -138,6 +211,14 @@ class InspectionMediaApiModule(BaseApiModule):
 
     def partial_update(self, id, json=None, **kwargs):
         """
+        Update the inspection media - this does not change the file contents.
+        Once a file is uploaded, the file cannot be updated. If the file needs to be updated, a new media object should be created.
+
+        Preview and thumbnail images are generated by the system, but can be provided for unusual file types.
+
+        Required permissions:
+        - (IsAuthenticated AND HasRolePermissions) OR APIKeyRequired
+
         :param dict json: $ref: '#/components/requestBodies/InspectionMediaUpdate'
 
         :returns: $ref: '#/components/schemas/InspectionMediaUpdate'
@@ -153,10 +234,78 @@ class InspectionMediaApiModule(BaseApiModule):
 
     def delete_alt(self, id, **kwargs):
         """
+        Delete removes the database object and the file in the Cloud Storage. Media objects can not be deleted for:
+        - `PUBLISHED` projects
+        - `locked` checklists
+        - or media attached to Defects / Findings
+
+        Required permissions:
+        - (IsAuthenticated AND HasRolePermissions) OR APIKeyRequired
+
         https://docs.huvrdata.app/reference/api_inspection-media_delete_alt
         """
         return self.client.request_json(
             method="delete",
             path=f"/api/inspection-media/{id}/",
+            **kwargs,
+        )
+
+    def extract_text(self, id, json=None, **kwargs):
+        """
+        Extract text from supported media types
+
+        Uses Vision to extract text from the media object. Supported media types are images and PDFs.
+
+        Required permissions:
+        - (IsAuthenticated AND HasRolePermissions) OR APIKeyRequired
+
+        :param dict json: $ref: '#/components/requestBodies/InspectionMedia'
+
+        https://docs.huvrdata.app/reference/api_inspection-media_extract_text
+        """
+        return self.client.request_json(
+            method="post",
+            path=f"/api/inspection-media/{id}/extract-text/",
+            json=json,
+            **kwargs,
+        )
+
+    def overlays_create(self, id, json=None, **kwargs):
+        """
+        Add or edit a overlay on a media object. Overlays are used to attach Defects (Findings) to media objects.
+
+        Required permissions:
+        - (IsAuthenticated AND HasRolePermissions) OR APIKeyRequired
+
+        :param dict json: $ref: '#/components/requestBodies/InspectionMediaOverlayCreate'
+
+        :returns: $ref: '#/components/schemas/InspectionMedia'
+
+        https://docs.huvrdata.app/reference/api_inspection-media_overlays_create
+        """
+        return self.client.request_json(
+            method="post",
+            path=f"/api/inspection-media/{id}/overlays/",
+            json=json,
+            **kwargs,
+        )
+
+    def overlays_partial_update(self, id, json=None, **kwargs):
+        """
+        Add or edit a overlay on a media object. Overlays are used to attach Defects (Findings) to media objects.
+
+        Required permissions:
+        - (IsAuthenticated AND HasRolePermissions) OR APIKeyRequired
+
+        :param dict json: $ref: '#/components/requestBodies/InspectionMedia'
+
+        :returns: $ref: '#/components/schemas/InspectionMedia'
+
+        https://docs.huvrdata.app/reference/api_inspection-media_overlays_partial_update
+        """
+        return self.client.request_json(
+            method="patch",
+            path=f"/api/inspection-media/{id}/overlays/",
+            json=json,
             **kwargs,
         )

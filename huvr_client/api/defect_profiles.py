@@ -10,29 +10,13 @@ class DefectProfilesApiModule(BaseApiModule):
         """
         Returns an array of defect profiles.
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: limit: integer
         offset: integer
         ordering: string
-
-        :returns: properties:
-          count:
-            type: integer
-          next:
-            format: uri
-            nullable: true
-            type: string
-          previous:
-            format: uri
-            nullable: true
-            type: string
-          results:
-            items:
-              $ref: '#/components/schemas/DefectProfile'
-            type: array
-        required:
-        - count
-        - results
-        type: object
 
         https://docs.huvrdata.app/reference/api_defect-profiles_list
         """
@@ -43,20 +27,42 @@ class DefectProfilesApiModule(BaseApiModule):
             **kwargs,
         )
 
-    def create(self, json=None, **kwargs):
+    def create(self, **kwargs):
         """
         View DefectProfile
 
 
-        :param dict json: $ref: '#/components/requestBodies/DefectProfile'
-
-        :returns: $ref: '#/components/schemas/DefectProfile'
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::defect_create
 
         https://docs.huvrdata.app/reference/api_defect-profiles_create
         """
         return self.client.request_json(
             method="post",
             path=f"/api/defect-profiles/",
+            **kwargs,
+        )
+
+    def import_template(self, json=None, **kwargs):
+        """
+        Import a defect profile template, currently imports yaml templates.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::UNDEFINED
+
+        :param dict json: $ref: '#/components/schemas/TemplateImport'
+
+        :returns: $ref: '#/components/schemas/DefectProfile'
+
+        https://docs.huvrdata.app/reference/api_defect-profiles_import_template
+        """
+        return self.client.request_json(
+            method="post",
+            path=f"/api/defect-profiles/import-template/",
             json=json,
             **kwargs,
         )
@@ -66,7 +72,9 @@ class DefectProfilesApiModule(BaseApiModule):
         Return the specific Defect Profile
         :params id
 
-        :returns: $ref: '#/components/schemas/DefectProfile'
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         https://docs.huvrdata.app/reference/api_defect-profiles_read
         """
@@ -76,45 +84,51 @@ class DefectProfilesApiModule(BaseApiModule):
             **kwargs,
         )
 
-    def update(self, id, json=None, **kwargs):
+    def update(self, id, **kwargs):
         """
         View DefectProfile
 
 
-        :param dict json: $ref: '#/components/requestBodies/DefectProfile'
-
-        :returns: $ref: '#/components/schemas/DefectProfile'
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::defect_edit
 
         https://docs.huvrdata.app/reference/api_defect-profiles_update
         """
         return self.client.request_json(
             method="put",
             path=f"/api/defect-profiles/{id}/",
-            json=json,
             **kwargs,
         )
 
-    def partial_update(self, id, json=None, **kwargs):
+    def partial_update(self, id, **kwargs):
         """
         View DefectProfile
 
 
-        :param dict json: $ref: '#/components/requestBodies/DefectProfile'
-
-        :returns: $ref: '#/components/schemas/DefectProfile'
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::defect_edit
 
         https://docs.huvrdata.app/reference/api_defect-profiles_partial_update
         """
         return self.client.request_json(
             method="patch",
             path=f"/api/defect-profiles/{id}/",
-            json=json,
             **kwargs,
         )
 
     def delete(self, id, **kwargs):
         """
         View DefectProfile
+
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::defect_delete
 
         https://docs.huvrdata.app/reference/api_defect-profiles_delete
         """

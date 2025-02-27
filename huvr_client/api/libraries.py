@@ -10,6 +10,10 @@ class LibrariesApiModule(BaseApiModule):
         """
         GET /api/libraries/
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: assigned: string
         limit: integer
         name: string
@@ -50,6 +54,10 @@ class LibrariesApiModule(BaseApiModule):
         """
         View library media
 
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :returns: $ref: '#/components/schemas/Library'
 

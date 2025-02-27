@@ -10,6 +10,10 @@ class AssetTypesApiModule(BaseApiModule):
         """
         Returns an array asset types.
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: is_active: string
         limit: integer
         name: string
@@ -50,6 +54,11 @@ class AssetTypesApiModule(BaseApiModule):
         Asset Type endpoint
 
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
+
         :param dict json: $ref: '#/components/requestBodies/AssetType'
 
         :returns: $ref: '#/components/schemas/AssetType'
@@ -68,6 +77,10 @@ class AssetTypesApiModule(BaseApiModule):
         Return the specific asset type
         :params id asset ID
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :returns: $ref: '#/components/schemas/AssetType'
 
         https://docs.huvrdata.app/reference/api_asset-types_read
@@ -81,6 +94,11 @@ class AssetTypesApiModule(BaseApiModule):
     def update(self, id, json=None, **kwargs):
         """
         AssetType updates
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
 
         :param dict json: $ref: '#/components/requestBodies/AssetType'
 
@@ -100,6 +118,11 @@ class AssetTypesApiModule(BaseApiModule):
         Asset Type endpoint
 
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
+
         :param dict json: $ref: '#/components/requestBodies/AssetType'
 
         :returns: $ref: '#/components/schemas/AssetType'
@@ -116,6 +139,12 @@ class AssetTypesApiModule(BaseApiModule):
     def delete(self, id, **kwargs):
         """
         Asset Type endpoint
+
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
 
         https://docs.huvrdata.app/reference/api_asset-types_delete
         """

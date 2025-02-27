@@ -10,6 +10,9 @@ class LibraryMediaApiModule(BaseApiModule):
         """
         GET /api/library-media/
 
+        Required permissions:
+        - IsAuthenticated
+
         :param dict params: assigned: string
         library: string
         library_name: string
@@ -54,6 +57,9 @@ class LibraryMediaApiModule(BaseApiModule):
 
         Generate a signed url that will allow the client to upload directly to GCS.
 
+        Required permissions:
+        - IsAuthenticated
+
         :param dict json: $ref: '#/components/requestBodies/LibraryMediaCreate'
 
         :returns: $ref: '#/components/schemas/LibraryMedia'
@@ -67,10 +73,33 @@ class LibraryMediaApiModule(BaseApiModule):
             **kwargs,
         )
 
+    def delete(self, json=None, **kwargs):
+        """
+        Delete multiple Library Media objects at once.
+
+        Required permissions:
+        - IsAuthenticated
+
+        :param dict json: $ref: '#/components/schemas/LibraryMedia'
+
+        :returns: $ref: '#/components/schemas/LibraryMedia'
+
+        https://docs.huvrdata.app/reference/api_library-media_delete
+        """
+        return self.client.request_json(
+            method="post",
+            path=f"/api/library-media/bulk-delete/",
+            json=json,
+            **kwargs,
+        )
+
     def summary(self, params=None, **kwargs):
         """
         View library media
 
+
+        Required permissions:
+        - IsAuthenticated
 
         :param dict params: assigned: string
         library: string
@@ -96,6 +125,9 @@ class LibraryMediaApiModule(BaseApiModule):
         Return the specific library media
         :params id media ID
 
+        Required permissions:
+        - IsAuthenticated
+
         :returns: $ref: '#/components/schemas/LibraryMedia'
 
         https://docs.huvrdata.app/reference/api_library-media_read
@@ -110,6 +142,9 @@ class LibraryMediaApiModule(BaseApiModule):
         """
         View library media
 
+
+        Required permissions:
+        - IsAuthenticated
 
         :param dict json: $ref: '#/components/requestBodies/LibraryMediaCreate'
 
@@ -129,6 +164,9 @@ class LibraryMediaApiModule(BaseApiModule):
         View library media
 
 
+        Required permissions:
+        - IsAuthenticated
+
         :param dict json: $ref: '#/components/requestBodies/LibraryMediaCreate'
 
         :returns: $ref: '#/components/schemas/LibraryMediaCreate'
@@ -142,11 +180,15 @@ class LibraryMediaApiModule(BaseApiModule):
             **kwargs,
         )
 
-    def delete(self, id, **kwargs):
+    def delete_alt(self, id, **kwargs):
         """
         View library media
 
-        https://docs.huvrdata.app/reference/api_library-media_delete
+
+        Required permissions:
+        - IsAuthenticated
+
+        https://docs.huvrdata.app/reference/api_library-media_delete_alt
         """
         return self.client.request_json(
             method="delete",

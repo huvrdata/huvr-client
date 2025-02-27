@@ -10,6 +10,10 @@ class ChecklistTemplatesApiModule(BaseApiModule):
         """
         Returns an array of checklist templates.
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: categories: string
         in_use: string
         limit: integer
@@ -17,6 +21,7 @@ class ChecklistTemplatesApiModule(BaseApiModule):
         offset: integer
         ordering: string
         schema_version: string
+        search: string
         state: string
         type: string
 
@@ -54,6 +59,11 @@ class ChecklistTemplatesApiModule(BaseApiModule):
         View Checklist Templates
 
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
+
         :param dict json: $ref: '#/components/requestBodies/ChecklistTemplate'
 
         :returns: $ref: '#/components/schemas/ChecklistTemplate'
@@ -67,12 +77,47 @@ class ChecklistTemplatesApiModule(BaseApiModule):
             **kwargs,
         )
 
+    def categories(self, params=None, **kwargs):
+        """
+        Return a list of all checklist template categories.
+        Used to retrieve the options to filter Checklists by category. The list cannot be
+        altered, and only shows categories that are currently in use by Checklists.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
+        :param dict params: categories: string
+        in_use: string
+        limit: integer
+        name: string
+        offset: integer
+        ordering: string
+        schema_version: string
+        search: string
+        state: string
+        type: string
+
+        https://docs.huvrdata.app/reference/api_checklist-templates_categories
+        """
+        return self.client.request_json(
+            method="get",
+            path=f"/api/checklist-templates/categories/",
+            params=params,
+            **kwargs,
+        )
+
     def import_template(self, json=None, **kwargs):
         """
         Import a checklist template, this endpoint can simply do the conversion
         from excel to JSON. Or it can create/update the template in a single request.
         The `action` parameter switches between import/convert.
         If the `id` is passed in it will attempt to update the exisiting template.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
 
         :param dict json: $ref: '#/components/requestBodies/ChecklistTemplate'
 
@@ -92,6 +137,10 @@ class ChecklistTemplatesApiModule(BaseApiModule):
         Return the specific Checklist Templates
         :params id template ID
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :returns: $ref: '#/components/schemas/ChecklistTemplate'
 
         https://docs.huvrdata.app/reference/api_checklist-templates_read
@@ -106,6 +155,11 @@ class ChecklistTemplatesApiModule(BaseApiModule):
         """
         View Checklist Templates
 
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
 
         :param dict json: $ref: '#/components/requestBodies/ChecklistTemplate'
 
@@ -125,6 +179,11 @@ class ChecklistTemplatesApiModule(BaseApiModule):
         View Checklist Templates
 
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
+
         :param dict json: $ref: '#/components/requestBodies/ChecklistTemplate'
 
         :returns: $ref: '#/components/schemas/ChecklistTemplate'
@@ -142,6 +201,12 @@ class ChecklistTemplatesApiModule(BaseApiModule):
         """
         View Checklist Templates
 
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
+
         https://docs.huvrdata.app/reference/api_checklist-templates_delete
         """
         return self.client.request_json(
@@ -153,6 +218,11 @@ class ChecklistTemplatesApiModule(BaseApiModule):
     def export_template(self, id, **kwargs):
         """
         Exports existing checklist template in excel format.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
 
         https://docs.huvrdata.app/reference/api_checklist-templates_export_template
         """

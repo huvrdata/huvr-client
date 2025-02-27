@@ -15,6 +15,10 @@ class AuthApiModule(BaseApiModule):
 
         Return a short-lived Token used for subsequent requests
 
+        Required permissions:
+        - WorkspaceRequired
+        - AllowAny
+
         :param dict json: $ref: '#/components/schemas/ObtainAccessTokenRequest'
 
         :returns: $ref: '#/components/schemas/ObtainAccessTokenResponse'
@@ -28,11 +32,32 @@ class AuthApiModule(BaseApiModule):
             **kwargs,
         )
 
+    def revoke_all_create(self, **kwargs):
+        """
+        Revoke all refresh tokens for the user
+        The verify_token or verify_session_cookie will see this change IF they are called with check_revoked=True
+        check_revoked requires and extra network call to the Identity Platform so we do not call it all the time
+
+        Required permissions:
+        - AllowAny
+
+        https://docs.huvrdata.app/reference/api_auth_revoke-all_create
+        """
+        return self.client.request_json(
+            method="post",
+            path=f"/api/auth/revoke-all/",
+            **kwargs,
+        )
+
     def session_login_create(self, **kwargs):
         """
         Verify JWT from client
          - sets `auth` cookie on response (used for _firebase_ auth)
          - sets `sessionid` cookie on response (used for _django_ auth)
+
+        Required permissions:
+        - WorkspaceRequired
+        - AllowAny
 
         https://docs.huvrdata.app/reference/api_auth_session-login_create
         """
@@ -45,6 +70,9 @@ class AuthApiModule(BaseApiModule):
     def session_logout_create(self, **kwargs):
         """
         Removes session cookie
+
+        Required permissions:
+        - AllowAny
 
         https://docs.huvrdata.app/reference/api_auth_session-logout_create
         """

@@ -10,6 +10,10 @@ class ChecklistResultLinesApiModule(BaseApiModule):
         """
         Returns a list of ChecklistResultLines, supports various filters
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: checklist: string
         checklist__project: string
         checklist__project__name: string
@@ -67,6 +71,10 @@ class ChecklistResultLinesApiModule(BaseApiModule):
         Return a single ChecklistResultLine by id
             `id` pattern: "{checklist_id}::{section_key}::{line_key}"
             for example: "24::my_section::my_line"
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :returns: $ref: '#/components/schemas/ChecklistResultLine'
 

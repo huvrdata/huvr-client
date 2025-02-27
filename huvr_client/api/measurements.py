@@ -8,16 +8,27 @@ from .base_api_module import BaseApiModule
 class MeasurementsApiModule(BaseApiModule):
     def list(self, params=None, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: cml: string
         cml__name: string
+        cml_asset_path: string
+        collected_by__name: string
+        collected_on: string
+        comment: string
         limit: integer
         measurement_offset: string
         offset: integer
         ordering: string
         project: string
+        project__name: string
         search: string
         state: string
         type: string
+        units: string
+        value: string
 
         :returns: properties:
           count:
@@ -52,6 +63,11 @@ class MeasurementsApiModule(BaseApiModule):
         """
         create Measurement
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_edit
+
         :param dict json: $ref: '#/components/requestBodies/MeasurementCreate'
 
         :returns: $ref: '#/components/schemas/Measurement'
@@ -67,6 +83,11 @@ class MeasurementsApiModule(BaseApiModule):
 
     def delete(self, json=None, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::UNDEFINED
+
         :param dict json: $ref: '#/components/schemas/Measurement'
 
         https://docs.huvrdata.app/reference/api_measurements_delete
@@ -84,6 +105,11 @@ class MeasurementsApiModule(BaseApiModule):
         if asset_path is passed in. We will walk the downtree assets
         looking for matching CML's
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_edit
+
         :param dict json: $ref: '#/components/schemas/MeasurementImport'
 
         :returns: $ref: '#/components/schemas/Measurement'
@@ -99,6 +125,10 @@ class MeasurementsApiModule(BaseApiModule):
 
     def read(self, id, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :returns: $ref: '#/components/schemas/Measurement'
 
         https://docs.huvrdata.app/reference/api_measurements_read
@@ -111,6 +141,11 @@ class MeasurementsApiModule(BaseApiModule):
 
     def update(self, id, json=None, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_edit
+
         :param dict json: $ref: '#/components/requestBodies/MeasurementCreate'
 
         :returns: $ref: '#/components/schemas/Measurement'
@@ -126,6 +161,11 @@ class MeasurementsApiModule(BaseApiModule):
 
     def partial_update(self, id, json=None, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_edit
+
         :param dict json: $ref: '#/components/requestBodies/MeasurementCreate'
 
         :returns: $ref: '#/components/schemas/MeasurementCreate'
@@ -141,6 +181,11 @@ class MeasurementsApiModule(BaseApiModule):
 
     def delete_alt(self, id, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_edit
+
         https://docs.huvrdata.app/reference/api_measurements_delete_alt
         """
         return self.client.request_json(
