@@ -8,14 +8,28 @@ from .base_api_module import BaseApiModule
 class DefectsApiModule(BaseApiModule):
     def list(self, params=None, **kwargs):
         """
+        Returns an array of defects. The data returned is limited to the current user's permissions.
+        The DefectListSerializer is used to limit the data returned to only the necessary fields.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: asset: string
         asset__asset_path_cache__path: string
+        asset__in: string
         asset_type__in: string
+        client_id: string
+        cml: string
         component: string
         component_display: string
+        created_by: string
         created_on: string
         descendants: string
         geometry_exists: string
+        id: string
+        id__in: string
+        labels: string
         latest: string
         layer: string
         layer__in: string
@@ -36,11 +50,14 @@ class DefectsApiModule(BaseApiModule):
         project_type__in: string
         related_to: string
         repair_by: string
+        resolved_on: string
         search: string
         severity: string
         severity__in: string
         severity_display: string
         state: string
+        state_note: string
+        sub_type_display: string
         type: string
         type_display: string
 
@@ -75,6 +92,13 @@ class DefectsApiModule(BaseApiModule):
 
     def create(self, json=None, **kwargs):
         """
+        Defect / Finding API endpoint
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::defect_create
+
         :param dict json: $ref: '#/components/requestBodies/DefectCreate'
 
         :returns: $ref: '#/components/schemas/DefectCreate'
@@ -90,6 +114,13 @@ class DefectsApiModule(BaseApiModule):
 
     def edit(self, json=None, **kwargs):
         """
+        Bulk edit defects. Pass a list of defects and the fields to update.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::defect_edit
+
         :param dict json: $ref: '#/components/schemas/Defect'
 
         https://docs.huvrdata.app/reference/api_defects_edit
@@ -103,18 +134,31 @@ class DefectsApiModule(BaseApiModule):
 
     def filters(self, params=None, **kwargs):
         """
-        Returns defect filter object with the asset, asset manufacturer, asset_owner (company), severity, component, location zone, location code, and count
+        This is an internal endpoint and subject to change at anytime.
+        It provides the distinct list items in defects.
 
         No query parameters are supported on this endpoint.
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::UNDEFINED
+
         :param dict params: asset: string
         asset__asset_path_cache__path: string
+        asset__in: string
         asset_type__in: string
+        client_id: string
+        cml: string
         component: string
         component_display: string
+        created_by: string
         created_on: string
         descendants: string
         geometry_exists: string
+        id: string
+        id__in: string
+        labels: string
         latest: string
         layer: string
         layer__in: string
@@ -135,11 +179,14 @@ class DefectsApiModule(BaseApiModule):
         project_type__in: string
         related_to: string
         repair_by: string
+        resolved_on: string
         search: string
         severity: string
         severity__in: string
         severity_display: string
         state: string
+        state_note: string
+        sub_type_display: string
         type: string
         type_display: string
 
@@ -156,10 +203,16 @@ class DefectsApiModule(BaseApiModule):
 
     def link(self, json=None, **kwargs):
         """
-        Pass a list of defects,
-            will link them (via `Defect.newer_defect` field)
-            and return list of updated defects,
-            in order
+        For defects (Findings) that are about the issue. They can be merged/linked. This allows for tracking of the issue across multiple inspections.
+        Newer inspections may see a crack getting larger, or a repair not holding up. This allows the preservation of the original defect and the new defect includes
+        the latest data and imagery etc.
+
+        Pass a list of defects, will link them (via `Defect.newer_defect` field) and return list of updated defects, in order.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::defect_edit
 
         :param dict json: $ref: '#/components/schemas/DefectLink'
 
@@ -178,6 +231,12 @@ class DefectsApiModule(BaseApiModule):
 
     def read(self, id, **kwargs):
         """
+        Return the specific Defect
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :returns: $ref: '#/components/schemas/Defect'
 
         https://docs.huvrdata.app/reference/api_defects_read
@@ -190,6 +249,25 @@ class DefectsApiModule(BaseApiModule):
 
     def update(self, id, json=None, **kwargs):
         """
+        Update the defect object. After the initial review of a defect, certain fields are locked.
+        These fields are:
+        - asset
+        - component
+        - location_zone
+        - location_code
+        - cml
+        - severity
+        - type
+        - sub_type
+
+        Only users with `defect_edit_protected` permission can edit these fields after the initial review.
+        Subsequent inspections can create a new defect and link them to the original defects.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::defect_edit
+
         :param dict json: $ref: '#/components/requestBodies/DefectCreate'
 
         :returns: $ref: '#/components/schemas/Defect'
@@ -205,6 +283,13 @@ class DefectsApiModule(BaseApiModule):
 
     def partial_update(self, id, json=None, **kwargs):
         """
+        Defect / Finding API endpoint
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::defect_edit
+
         :param dict json: $ref: '#/components/requestBodies/DefectCreate'
 
         :returns: $ref: '#/components/schemas/DefectCreate'
@@ -220,6 +305,13 @@ class DefectsApiModule(BaseApiModule):
 
     def delete(self, id, **kwargs):
         """
+        Defect / Finding API endpoint
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::defect_delete
+
         https://docs.huvrdata.app/reference/api_defects_delete
         """
         return self.client.request_json(

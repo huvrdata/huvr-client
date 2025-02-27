@@ -10,12 +10,19 @@ class ProjectTypesApiModule(BaseApiModule):
         """
         Returns an array project types.
 
-        :param dict params: in_use: string
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
+        :param dict params: asset_type__in: string
+        checklist_template__name: string
+        in_use: string
         is_active: string
         limit: integer
         name: string
         offset: integer
         ordering: string
+        search: string
 
         :returns: properties:
           count:
@@ -50,6 +57,11 @@ class ProjectTypesApiModule(BaseApiModule):
         """
         accept a flat object for create, return nested detail object
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
+
         :param dict json: $ref: '#/components/requestBodies/ProjectTypeCreate'
 
         :returns: $ref: '#/components/schemas/ProjectTypeDetail'
@@ -68,6 +80,10 @@ class ProjectTypesApiModule(BaseApiModule):
         Return the specific project type
         :params id project_type ID
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :returns: $ref: '#/components/schemas/ProjectTypeDetail'
 
         https://docs.huvrdata.app/reference/api_project-types_read
@@ -82,6 +98,11 @@ class ProjectTypesApiModule(BaseApiModule):
         """
         Project Type endpoint
 
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
 
         :param dict json: $ref: '#/components/requestBodies/ProjectTypeCreate'
 
@@ -101,6 +122,11 @@ class ProjectTypesApiModule(BaseApiModule):
         Project Type endpoint
 
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
+
         :param dict json: $ref: '#/components/requestBodies/ProjectTypeCreate'
 
         :returns: $ref: '#/components/schemas/ProjectTypeCreate'
@@ -117,6 +143,12 @@ class ProjectTypesApiModule(BaseApiModule):
     def delete(self, id, **kwargs):
         """
         Project Type endpoint
+
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
 
         https://docs.huvrdata.app/reference/api_project-types_delete
         """

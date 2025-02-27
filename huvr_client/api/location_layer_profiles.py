@@ -10,29 +10,13 @@ class LocationLayerProfilesApiModule(BaseApiModule):
         """
         Returns an array of LocationLayerProfile.
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: limit: integer
         offset: integer
         ordering: string
-
-        :returns: properties:
-          count:
-            type: integer
-          next:
-            format: uri
-            nullable: true
-            type: string
-          previous:
-            format: uri
-            nullable: true
-            type: string
-          results:
-            items:
-              $ref: '#/components/schemas/LocationLayerProfile'
-            type: array
-        required:
-        - count
-        - results
-        type: object
 
         https://docs.huvrdata.app/reference/api_location-layer-profiles_list
         """
@@ -43,20 +27,44 @@ class LocationLayerProfilesApiModule(BaseApiModule):
             **kwargs,
         )
 
-    def create(self, json=None, **kwargs):
+    def create(self, **kwargs):
         """
         View LocationLayerProfile
 
 
-        :param dict json: $ref: '#/components/requestBodies/LocationLayerProfile'
-
-        :returns: $ref: '#/components/schemas/LocationLayerProfile'
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
 
         https://docs.huvrdata.app/reference/api_location-layer-profiles_create
         """
         return self.client.request_json(
             method="post",
             path=f"/api/location-layer-profiles/",
+            **kwargs,
+        )
+
+    def import_template(self, json=None, **kwargs):
+        """
+        Import a Location Layer template, this endpoint can simply do the conversion to yaml
+        The `action` parameter switches between import/convert.
+        If the `id` is passed in it will attempt to update the exisiting template.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::UNDEFINED
+
+        :param dict json: $ref: '#/components/schemas/LocationLayerProfile'
+
+        :returns: $ref: '#/components/schemas/LocationLayerProfile'
+
+        https://docs.huvrdata.app/reference/api_location-layer-profiles_import_template
+        """
+        return self.client.request_json(
+            method="post",
+            path=f"/api/location-layer-profiles/import-template/",
             json=json,
             **kwargs,
         )
@@ -66,7 +74,9 @@ class LocationLayerProfilesApiModule(BaseApiModule):
         Return the specific LocationLayerProfile
         :params id
 
-        :returns: $ref: '#/components/schemas/LocationLayerProfile'
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         https://docs.huvrdata.app/reference/api_location-layer-profiles_read
         """
@@ -76,45 +86,51 @@ class LocationLayerProfilesApiModule(BaseApiModule):
             **kwargs,
         )
 
-    def update(self, id, json=None, **kwargs):
+    def update(self, id, **kwargs):
         """
         View LocationLayerProfile
 
 
-        :param dict json: $ref: '#/components/requestBodies/LocationLayerProfile'
-
-        :returns: $ref: '#/components/schemas/LocationLayerProfile'
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
 
         https://docs.huvrdata.app/reference/api_location-layer-profiles_update
         """
         return self.client.request_json(
             method="put",
             path=f"/api/location-layer-profiles/{id}/",
-            json=json,
             **kwargs,
         )
 
-    def partial_update(self, id, json=None, **kwargs):
+    def partial_update(self, id, **kwargs):
         """
         View LocationLayerProfile
 
 
-        :param dict json: $ref: '#/components/requestBodies/LocationLayerProfile'
-
-        :returns: $ref: '#/components/schemas/LocationLayerProfile'
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
 
         https://docs.huvrdata.app/reference/api_location-layer-profiles_partial_update
         """
         return self.client.request_json(
             method="patch",
             path=f"/api/location-layer-profiles/{id}/",
-            json=json,
             **kwargs,
         )
 
     def delete(self, id, **kwargs):
         """
         View LocationLayerProfile
+
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::configuration_management_build
 
         https://docs.huvrdata.app/reference/api_location-layer-profiles_delete
         """

@@ -10,6 +10,10 @@ class AssetsApiModule(BaseApiModule):
         """
         Returns an array of assets.
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: app_key: string
         asset_condition: string
         asset_condition__in: string
@@ -76,7 +80,13 @@ class AssetsApiModule(BaseApiModule):
 
     def create(self, json=None, **kwargs):
         """
-        accept a flat object for create, return nested detail object
+        Create a new asset. Asset name and parent must be unique.
+        Assets are stored in a folder like structure with a parent-child relationship.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::asset_create
 
         :param dict json: $ref: '#/components/schemas/AssetCreate'
 
@@ -93,8 +103,11 @@ class AssetsApiModule(BaseApiModule):
 
     def asset_condition_map(self, params=None, **kwargs):
         """
-        Asset endpoint
+        Returns a list of asset with conditions and location. Lighter version of asset list to support more data displayed on the map.
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :param dict params: app_key: string
         asset_condition: string
@@ -146,7 +159,14 @@ class AssetsApiModule(BaseApiModule):
 
     def filters(self, params=None, **kwargs):
         """
+        Returns object with a list of owners(companies), parents(sites), asset types,
+        asset conditions, and labels
+
         No query parameters are supported on this endpoint.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :param dict params: app_key: string
         asset_condition: string
@@ -196,8 +216,11 @@ class AssetsApiModule(BaseApiModule):
 
     def tree(self, params=None, **kwargs):
         """
-        Asset endpoint
+        Returns a tree of assets with parent-child relationships. Does not currently support query parameters.
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :param dict params: app_key: string
         asset_condition: string
@@ -268,6 +291,10 @@ class AssetsApiModule(BaseApiModule):
         Return the specific asset
         :params id asset ID
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :returns: $ref: '#/components/schemas/AssetDetail'
 
         https://docs.huvrdata.app/reference/api_assets_read
@@ -280,7 +307,12 @@ class AssetsApiModule(BaseApiModule):
 
     def update(self, id, json=None, **kwargs):
         """
-        Asset update. Asset type and asset path are ignored on updates
+        Asset type and asset path are ignored on updates.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::asset_edit
 
         :param dict json: $ref: '#/components/requestBodies/AssetUpdate'
 
@@ -299,6 +331,10 @@ class AssetsApiModule(BaseApiModule):
         """
         Asset endpoint
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::asset_edit
 
         :param dict json: $ref: '#/components/requestBodies/AssetUpdate'
 
@@ -316,6 +352,11 @@ class AssetsApiModule(BaseApiModule):
     def delete(self, id, **kwargs):
         """
         Asset endpoint
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::asset_delete
 
         https://docs.huvrdata.app/reference/api_assets_delete
         """

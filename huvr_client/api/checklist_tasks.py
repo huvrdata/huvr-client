@@ -10,9 +10,14 @@ class ChecklistTasksApiModule(BaseApiModule):
         """
         Returns an array of ChecklistTasks.
 
+        Required permissions:
+        - ((IsAuthenticated AND HasRolePermissions) AND IsOwnerOrManager) OR APIKeyRequired
+
         :param dict params: assigned: string
+        assigned_or_created_by_me: string
         assigned_to: string
         checklist: string
+        created_by_me: string
         done: string
         limit: integer
         offset: integer
@@ -54,6 +59,9 @@ class ChecklistTasksApiModule(BaseApiModule):
         View Checklist Task
 
 
+        Required permissions:
+        - ((IsAuthenticated AND HasRolePermissions) AND IsOwnerOrManager) OR APIKeyRequired
+
         :param dict json: $ref: '#/components/requestBodies/ChecklistTaskCreate'
 
         :returns: $ref: '#/components/schemas/ChecklistTask'
@@ -67,10 +75,33 @@ class ChecklistTasksApiModule(BaseApiModule):
             **kwargs,
         )
 
+    def bulk_create(self, json=None, **kwargs):
+        """
+        Bulk create checklist tasks for a list of project ids.
+
+        Required permissions:
+        - ((IsAuthenticated AND HasRolePermissions) AND IsOwnerOrManager) OR APIKeyRequired
+
+        :param dict json: $ref: '#/components/schemas/ChecklistTaskBulkCreate'
+
+        :returns: $ref: '#/components/schemas/ChecklistTask'
+
+        https://docs.huvrdata.app/reference/api_checklist-tasks_bulk_create
+        """
+        return self.client.request_json(
+            method="post",
+            path=f"/api/checklist-tasks/bulk-create/",
+            json=json,
+            **kwargs,
+        )
+
     def read(self, id, **kwargs):
         """
         Return the specific Checklist Task
         :params id
+
+        Required permissions:
+        - ((IsAuthenticated AND HasRolePermissions) AND IsOwnerOrManager) OR APIKeyRequired
 
         :returns: $ref: '#/components/schemas/ChecklistTask'
 
@@ -86,6 +117,9 @@ class ChecklistTasksApiModule(BaseApiModule):
         """
         View Checklist Task
 
+
+        Required permissions:
+        - ((IsAuthenticated AND HasRolePermissions) AND IsOwnerOrManager) OR APIKeyRequired
 
         :param dict json: $ref: '#/components/requestBodies/ChecklistTaskCreate'
 
@@ -105,6 +139,9 @@ class ChecklistTasksApiModule(BaseApiModule):
         View Checklist Task
 
 
+        Required permissions:
+        - ((IsAuthenticated AND HasRolePermissions) AND IsOwnerOrManager) OR APIKeyRequired
+
         :param dict json: $ref: '#/components/requestBodies/ChecklistTaskCreate'
 
         :returns: $ref: '#/components/schemas/ChecklistTaskCreate'
@@ -121,6 +158,10 @@ class ChecklistTasksApiModule(BaseApiModule):
     def delete(self, id, **kwargs):
         """
         View Checklist Task
+
+
+        Required permissions:
+        - ((IsAuthenticated AND HasRolePermissions) AND IsOwnerOrManager) OR APIKeyRequired
 
         https://docs.huvrdata.app/reference/api_checklist-tasks_delete
         """

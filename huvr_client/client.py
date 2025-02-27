@@ -164,7 +164,8 @@ class HuvrClient:
         :param kwargs: Additional keyword arguments to pass to the request.
         """
 
-        url = self.base_url + path
+        if not path.startswith("http"):
+            url = self.base_url + path
 
         if self.verbose:
             print(

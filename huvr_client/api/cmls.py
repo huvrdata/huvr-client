@@ -8,6 +8,10 @@ from .base_api_module import BaseApiModule
 class CmlsApiModule(BaseApiModule):
     def list(self, params=None, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: access_display: string
         app_key: string
         asset: string
@@ -19,10 +23,14 @@ class CmlsApiModule(BaseApiModule):
         is_active: string
         limit: integer
         location_code_display: string
+        location_zone: string
+        location_zone_display: string
         measurements_summary__base: string
         measurements_summary__last: string
         measurements_summary__near: string
         name: string
+        next_inspection_date: string
+        next_inspection_reason: string
         offset: integer
         ordering: string
         search: string
@@ -61,6 +69,11 @@ class CmlsApiModule(BaseApiModule):
         """
         create CML
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::asset_create
+
         :param dict json: $ref: '#/components/requestBodies/CMLCreate'
 
         :returns: $ref: '#/components/schemas/CML'
@@ -76,6 +89,10 @@ class CmlsApiModule(BaseApiModule):
 
     def read(self, id, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :returns: $ref: '#/components/schemas/CML'
 
         https://docs.huvrdata.app/reference/api_cmls_read
@@ -88,6 +105,11 @@ class CmlsApiModule(BaseApiModule):
 
     def update(self, id, json=None, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::asset_edit
+
         :param dict json: $ref: '#/components/requestBodies/CMLCreate'
 
         :returns: $ref: '#/components/schemas/CML'
@@ -103,6 +125,11 @@ class CmlsApiModule(BaseApiModule):
 
     def partial_update(self, id, json=None, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::asset_edit
+
         :param dict json: $ref: '#/components/requestBodies/CMLCreate'
 
         :returns: $ref: '#/components/schemas/CMLCreate'
@@ -118,6 +145,11 @@ class CmlsApiModule(BaseApiModule):
 
     def delete(self, id, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::asset_delete
+
         https://docs.huvrdata.app/reference/api_cmls_delete
         """
         return self.client.request_json(

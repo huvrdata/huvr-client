@@ -10,6 +10,10 @@ class ChecklistTemplatesFillableApiModule(BaseApiModule):
         """
         Returns an array of checklist templates ready to be used by the client.
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: categories: string
         in_use: string
         limit: integer
@@ -17,6 +21,7 @@ class ChecklistTemplatesFillableApiModule(BaseApiModule):
         offset: integer
         ordering: string
         schema_version: string
+        search: string
         state: string
         type: string
 
@@ -53,6 +58,10 @@ class ChecklistTemplatesFillableApiModule(BaseApiModule):
         """
         Return the specific Checklist Templates
         :params id template ID
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :returns: $ref: '#/components/schemas/ChecklistTemplateFillable'
 

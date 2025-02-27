@@ -10,6 +10,11 @@ class HeatDataApiModule(BaseApiModule):
         """
         Returns an array HEAT data
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::process_data_view
+
         :param dict params: billet_weight: string
         charge_weight: string
         created_on: string
@@ -58,6 +63,11 @@ class HeatDataApiModule(BaseApiModule):
         """
         Return the specific HEAT data
         :params id HeatData ID
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::UNDEFINED
 
         :returns: $ref: '#/components/schemas/HeatData'
 

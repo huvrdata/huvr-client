@@ -10,6 +10,10 @@ class CrewsApiModule(BaseApiModule):
         """
         Returns an array of Crew objectss
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: company: string
         is_active: string
         limit: integer
@@ -51,6 +55,11 @@ class CrewsApiModule(BaseApiModule):
         """
         accept a flat object for create, return nested detail object
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::crew_create
+
         :param dict json: $ref: '#/components/schemas/CrewCreate'
 
         :returns: $ref: '#/components/schemas/CrewDetail'
@@ -69,6 +78,10 @@ class CrewsApiModule(BaseApiModule):
         Return the specific Crew
         :params id crew ID
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :returns: $ref: '#/components/schemas/CrewDetail'
 
         https://docs.huvrdata.app/reference/api_crews_read
@@ -82,6 +95,11 @@ class CrewsApiModule(BaseApiModule):
     def update(self, id, json=None, **kwargs):
         """
         Crew update. Company is ignored on updates
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::crew_edit
 
         :param dict json: $ref: '#/components/requestBodies/CrewUpdate'
 
@@ -101,6 +119,11 @@ class CrewsApiModule(BaseApiModule):
         Crew endpoint
 
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::crew_edit
+
         :param dict json: $ref: '#/components/requestBodies/CrewUpdate'
 
         :returns: $ref: '#/components/schemas/CrewUpdate'
@@ -118,10 +141,39 @@ class CrewsApiModule(BaseApiModule):
         """
         Crew endpoint
 
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::crew_delete
+
         https://docs.huvrdata.app/reference/api_crews_delete
         """
         return self.client.request_json(
             method="delete",
             path=f"/api/crews/{id}/",
+            **kwargs,
+        )
+
+    def membership(self, id, json=None, **kwargs):
+        """
+        Crew endpoint
+
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::crew_manage
+
+        :param dict json: $ref: '#/components/schemas/CrewMembership'
+
+        :returns: $ref: '#/components/schemas/CrewDetail'
+
+        https://docs.huvrdata.app/reference/api_crews_membership
+        """
+        return self.client.request_json(
+            method="post",
+            path=f"/api/crews/{id}/membership/",
+            json=json,
             **kwargs,
         )

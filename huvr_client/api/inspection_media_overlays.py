@@ -8,6 +8,10 @@ from .base_api_module import BaseApiModule
 class InspectionMediaOverlaysApiModule(BaseApiModule):
     def list(self, params=None, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: limit: integer
         offset: integer
         ordering: string
@@ -46,6 +50,11 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
         create inspection media overlay, the media object has to already exist.
         The defect can be passed in.
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_edit
+
         :param dict json: $ref: '#/components/requestBodies/InspectionMediaOverlay'
 
         :returns: $ref: '#/components/schemas/InspectionMediaOverlay'
@@ -61,6 +70,10 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
 
     def read(self, id, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :returns: $ref: '#/components/schemas/InspectionMediaOverlay'
 
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_read
@@ -73,6 +86,11 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
 
     def update(self, id, json=None, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_edit
+
         :param dict json: $ref: '#/components/requestBodies/InspectionMediaOverlay'
 
         :returns: $ref: '#/components/schemas/InspectionMediaOverlay'
@@ -88,6 +106,11 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
 
     def partial_update(self, id, json=None, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_edit
+
         :param dict json: $ref: '#/components/requestBodies/InspectionMediaOverlayCreate'
 
         :returns: $ref: '#/components/schemas/InspectionMediaOverlayCreate'
@@ -103,6 +126,11 @@ class InspectionMediaOverlaysApiModule(BaseApiModule):
 
     def delete(self, id, **kwargs):
         """
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_edit
+
         https://docs.huvrdata.app/reference/api_inspection-media-overlays_delete
         """
         return self.client.request_json(

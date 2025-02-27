@@ -10,6 +10,10 @@ class CompaniesApiModule(BaseApiModule):
         """
         Returns an array companies.
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: is_active: string
         limit: integer
         name: string
@@ -48,12 +52,18 @@ class CompaniesApiModule(BaseApiModule):
 
     def create(self, json=None, **kwargs):
         """
-        View companies
+        Create a new company. Company name must be unique. A company is can be thought of as an organization within a large company or a standalone company.
 
+        Companies can own assets, have crews, and have users.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::company_create
 
         :param dict json: $ref: '#/components/requestBodies/Company'
 
-        :returns: $ref: '#/components/schemas/Company'
+        :returns: $ref: '#/components/schemas/CompanyDetail'
 
         https://docs.huvrdata.app/reference/api_companies_create
         """
@@ -66,10 +76,13 @@ class CompaniesApiModule(BaseApiModule):
 
     def read(self, id, **kwargs):
         """
-        Return the specific company
-        :params id Company ID
+        Return the specific company or organization by ID
 
-        :returns: $ref: '#/components/schemas/Company'
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
+        :returns: $ref: '#/components/schemas/CompanyDetail'
 
         https://docs.huvrdata.app/reference/api_companies_read
         """
@@ -81,11 +94,16 @@ class CompaniesApiModule(BaseApiModule):
 
     def update(self, id, json=None, **kwargs):
         """
-        company update
+        Update the company data. Use the membership endpoint to update users in the company.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::company_edit
 
         :param dict json: $ref: '#/components/requestBodies/Company'
 
-        :returns: $ref: '#/components/schemas/Company'
+        :returns: $ref: '#/components/schemas/CompanyDetail'
 
         https://docs.huvrdata.app/reference/api_companies_update
         """
@@ -98,8 +116,10 @@ class CompaniesApiModule(BaseApiModule):
 
     def partial_update(self, id, json=None, **kwargs):
         """
-        View companies
-
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::company_edit
 
         :param dict json: $ref: '#/components/requestBodies/Company'
 
@@ -116,12 +136,37 @@ class CompaniesApiModule(BaseApiModule):
 
     def delete(self, id, **kwargs):
         """
-        View companies
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::company_delete
 
         https://docs.huvrdata.app/reference/api_companies_delete
         """
         return self.client.request_json(
             method="delete",
             path=f"/api/companies/{id}/",
+            **kwargs,
+        )
+
+    def membership(self, id, json=None, **kwargs):
+        """
+        Pass in a list of user IDs to add or remove from the company
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::company_edit
+
+        :param dict json: $ref: '#/components/schemas/CompanyMembership'
+
+        :returns: $ref: '#/components/schemas/CompanyDetail'
+
+        https://docs.huvrdata.app/reference/api_companies_membership
+        """
+        return self.client.request_json(
+            method="post",
+            path=f"/api/companies/{id}/membership/",
+            json=json,
             **kwargs,
         )

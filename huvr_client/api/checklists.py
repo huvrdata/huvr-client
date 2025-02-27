@@ -8,15 +8,25 @@ from .base_api_module import BaseApiModule
 class ChecklistsApiModule(BaseApiModule):
     def list(self, params=None, **kwargs):
         """
-        Returns an array of checklist instances.
+        Returns an array of checklist instances. The data returned is limited to the current user's permissions.
+        The ChecklistInstanceListSerializer is used to limit the data returned to only the necessary fields.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :param dict params: asset: string
         asset__asset_path_cache__path: string
         asset__id: string
+        asset__owner__id: string
+        asset__owner__name: string
+        client_id: string
         created_by: string
         created_by_me: string
         created_on: string
         descendants: string
+        is_locked: string
+        is_project_primary: string
         labels: string
         limit: integer
         offset: integer
@@ -30,6 +40,8 @@ class ChecklistsApiModule(BaseApiModule):
         template__id__in: string
         template__name: string
         template__type: string
+        updated_on: string
+        work_done_on: string
 
         :returns: properties:
           count:
@@ -62,8 +74,44 @@ class ChecklistsApiModule(BaseApiModule):
 
     def create(self, json=None, **kwargs):
         """
-        View Checklist Instances
+        Create a new checklist instance (aka a Form) from a template.
 
+        The `template` field is required and should be the ID of the checklist_template to use.
+
+        The checklist is optionally linked to a project and an asset.
+
+        Use an unique `client_id` to avoid duplicates. Using a `client_id` that already exists will result in a 400 error.
+
+        The main edits to the checklist are done using the `edit` object. Each edit is a change to the checklist and is stored in the database.
+        The combined edits are used to generate the final checklist results.
+
+        The keys should match the key in the Checklist Template.
+
+        The structure is as follows:
+
+        {
+            "section_key1": {
+                "line_key1": { "value": "new value", "notes": "Optional note" },
+                "line_key2": { "value": "new value", "media": [{"id": 1}] },
+            "section_key2": {
+                "line_key": { "notes": "Optional note" }
+                }
+        }
+
+        The line dictionary supports the following keys: value, notes, media - where media is an list of media objects.
+        The line dictionary can include other keys, but they may not be shown in reports or used in the system.
+        Do not send keys that have not changed - when creating or editing a checklist, only send the keys that needed.
+
+        The section and line keys should match the checklist template - the validation does not currently check this,
+        but mismatched keys will be ignored and not displayed.
+
+        When adding a media object to the media array, only the id is required. The media array that is returned from
+        the API will inclue the full media object.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_create
 
         :param dict json: $ref: '#/components/schemas/ChecklistInstanceCreate'
 
@@ -78,10 +126,92 @@ class ChecklistsApiModule(BaseApiModule):
             **kwargs,
         )
 
+    def bulk_lock(self, json=None, **kwargs):
+        """
+        Pass the checklist IDs and the action (LOCK/UNLOCK) to lock/unlock multiple checklists at once. The number of modified checklists is returned.
+
+        Example request: {"ids": [1, 2], "action": "LOCK"}
+        Example response {"modified": 2}
+
+        **Note:**
+        Primary checklists are part of the project and cannot be locked/unlocked independently. They are always locked/unlocked with the project.
+        Sending a primary checklist ID will be ignored.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
+        :param dict json: $ref: '#/components/schemas/ChecklistInstanceBulkLock'
+
+        https://docs.huvrdata.app/reference/api_checklists_bulk_lock
+        """
+        return self.client.request_json(
+            method="post",
+            path=f"/api/checklists/bulk-lock/",
+            json=json,
+            **kwargs,
+        )
+
+    def list_detailed(self, params=None, **kwargs):
+        """
+        Show a detailed list of checklist instances. This endpoint is slow but it
+        avoids needing to make many queries to get detailed information. Use a low number
+        for the limit, such as ?limit=10.
+
+        Includes all related fields, such as the checklist template, asset, and project.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
+        :param dict params: asset: string
+        asset__asset_path_cache__path: string
+        asset__id: string
+        asset__owner__id: string
+        asset__owner__name: string
+        client_id: string
+        created_by: string
+        created_by_me: string
+        created_on: string
+        descendants: string
+        is_locked: string
+        is_project_primary: string
+        labels: string
+        limit: integer
+        offset: integer
+        ordering: string
+        project: string
+        recent: string
+        search: string
+        tasks: string
+        template: string
+        template__categories: string
+        template__id__in: string
+        template__name: string
+        template__type: string
+        updated_on: string
+        work_done_on: string
+
+        :returns: items:
+          $ref: '#/components/schemas/ChecklistInstance'
+        type: array
+
+        https://docs.huvrdata.app/reference/api_checklists_list_detailed
+        """
+        return self.client.request_json(
+            method="get",
+            path=f"/api/checklists/detailed/",
+            params=params,
+            **kwargs,
+        )
+
     def read(self, id, **kwargs):
         """
         Return the specific Checklist Instances
-        :params id Instance ID
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :returns: $ref: '#/components/schemas/ChecklistInstance'
 
@@ -93,9 +223,101 @@ class ChecklistsApiModule(BaseApiModule):
             **kwargs,
         )
 
+    def update(self, id, json=None, **kwargs):
+        """
+        We don't allow updating using `update` as we have a special `edit` method.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
+        :param dict json: $ref: '#/components/requestBodies/ChecklistInstance'
+
+        :returns: $ref: '#/components/schemas/ChecklistInstance'
+
+        https://docs.huvrdata.app/reference/api_checklists_update
+        """
+        return self.client.request_json(
+            method="put",
+            path=f"/api/checklists/{id}/",
+            json=json,
+            **kwargs,
+        )
+
+    def partial_update(self, id, json=None, **kwargs):
+        """
+        Method not supported. Use the /edit/ endpoint instead.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
+        :param dict json: $ref: '#/components/requestBodies/ChecklistInstance'
+
+        :returns: $ref: '#/components/schemas/ChecklistInstance'
+
+        https://docs.huvrdata.app/reference/api_checklists_partial_update
+        """
+        return self.client.request_json(
+            method="patch",
+            path=f"/api/checklists/{id}/",
+            json=json,
+            **kwargs,
+        )
+
+    def delete(self, id, **kwargs):
+        """
+        Checklists can be deleted by the user who created them or by a user with the `checklist_edit` permission.
+        Locked and primary checklists cannot be deleted.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_edit
+
+        https://docs.huvrdata.app/reference/api_checklists_delete
+        """
+        return self.client.request_json(
+            method="delete",
+            path=f"/api/checklists/{id}/",
+            **kwargs,
+        )
+
     def edit(self, id, json=None, **kwargs):
         """
-        edit a checklist instance
+        Updates the results of a checklist instance by applying an edit. The changes are tracked per user.
+        Locked checklists will save - but not apply the edit.
+
+        The main edits to the checklist are done using the `edit` object. Each edit is a revision to the checklist
+        and is stored in the database. The combined edits are used to generate the final checklist results.
+
+        The keys should match the keys in the Checklist Template.
+
+        The structure is as follows:
+
+        {
+            "section_key1": {
+                "line_key1": { "value": "new value", "notes": "Optional note" },
+                "line_key2": { "value": "new value", "media": [{"id": 1}] },
+            "section_key2": {
+                "line_key": { "notes": "Optional note" }
+                }
+        }
+
+        The line dictionary supports the following keys: value, notes, media - where media is an list of media objects.
+        The line dictionary can include other keys, but they may not be shown in reports or used in the system.
+        Do not send keys that have not changed - when creating or editing a checklist, only send the keys that needed.
+
+        The section and line keys should match the checklist template - the validation does not currently check this,
+        but mismatched keys will be ignored and not displayed.
+
+        When adding a media object to the media array, only the id is required. The media array that is returned from
+        the API will inclue the full media object.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_edit
 
         :param dict json: $ref: '#/components/schemas/ChecklistEditInline'
 
@@ -110,15 +332,40 @@ class ChecklistsApiModule(BaseApiModule):
             **kwargs,
         )
 
-    def revisions_read(self, id, **kwargs):
+    def lock(self, id, json=None, **kwargs):
         """
-        Set revisions object
+        Lock a checklist so it can't be modified. Use the /bulk-lock/ endpoint instead.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_lock
+
+        :param dict json: $ref: '#/components/requestBodies/ChecklistInstance'
+
+        https://docs.huvrdata.app/reference/api_checklists_lock
+        """
+        return self.client.request_json(
+            method="post",
+            path=f"/api/checklists/{id}/lock/",
+            json=json,
+            **kwargs,
+        )
+
+    def revisions(self, id, **kwargs):
+        """
+        List of revisions/edits to the checklist instance. This API is subject to change to support pagination, filtering, and sorting.
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_edit
 
         :returns: items:
           $ref: '#/components/schemas/ChecklistRevisionEdit'
         type: array
 
-        https://docs.huvrdata.app/reference/api_checklists_revisions_read
+        https://docs.huvrdata.app/reference/api_checklists_revisions
         """
         return self.client.request_json(
             method="get",
@@ -126,53 +373,22 @@ class ChecklistsApiModule(BaseApiModule):
             **kwargs,
         )
 
-    def revisions_partial_update(self, id, json=None, **kwargs):
+    def unlock(self, id, json=None, **kwargs):
         """
-        Set revisions object
+        Unlock a checklist so it can't be modified. Use the /bulk-lock/ endpoint instead.
 
-        :param dict json: $ref: '#/components/schemas/ChecklistEdit'
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::checklist_unlock
 
-        :returns: $ref: '#/components/schemas/ChecklistInstance'
+        :param dict json: $ref: '#/components/requestBodies/ChecklistInstance'
 
-        https://docs.huvrdata.app/reference/api_checklists_revisions_partial_update
-        """
-        return self.client.request_json(
-            method="patch",
-            path=f"/api/checklists/{id}/revisions/",
-            json=json,
-            **kwargs,
-        )
-
-    def overlays_create(self, id, json=None, **kwargs):
-        """
-        add or edit a overlay on a media object
-
-        :param dict json: $ref: '#/components/requestBodies/InspectionMediaOverlayCreate'
-
-        :returns: $ref: '#/components/schemas/InspectionMedia'
-
-        https://docs.huvrdata.app/reference/api_inspection-media_overlays_create
+        https://docs.huvrdata.app/reference/api_checklists_unlock
         """
         return self.client.request_json(
             method="post",
-            path=f"/api/inspection-media/{id}/overlays/",
-            json=json,
-            **kwargs,
-        )
-
-    def overlays_partial_update(self, id, json=None, **kwargs):
-        """
-        add or edit a overlay on a media object
-
-        :param dict json: $ref: '#/components/requestBodies/InspectionMedia'
-
-        :returns: $ref: '#/components/schemas/InspectionMedia'
-
-        https://docs.huvrdata.app/reference/api_inspection-media_overlays_partial_update
-        """
-        return self.client.request_json(
-            method="patch",
-            path=f"/api/inspection-media/{id}/overlays/",
+            path=f"/api/checklists/{id}/unlock/",
             json=json,
             **kwargs,
         )

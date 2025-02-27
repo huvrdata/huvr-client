@@ -10,6 +10,10 @@ class UsersApiModule(BaseApiModule):
         """
         Returns an array users.
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
         :param dict params: company: string
         date_joined: string
         email: string
@@ -56,6 +60,11 @@ class UsersApiModule(BaseApiModule):
         User create
         This function is used when creating a new user using the Users tab on the frontend
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::user_create
+
         :param dict json: $ref: '#/components/requestBodies/UserCreate'
 
         :returns: $ref: '#/components/schemas/User'
@@ -74,6 +83,11 @@ class UsersApiModule(BaseApiModule):
         Pass a list of users addresses,
             sets the same roles/company for all
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::user_create
+
         :param dict json: $ref: '#/components/schemas/UserImport'
 
         https://docs.huvrdata.app/reference/api_users_import_users
@@ -87,7 +101,12 @@ class UsersApiModule(BaseApiModule):
 
     def me_read(self, params=None, **kwargs):
         """
-        Return current user
+        View users
+
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :param dict params: company: string
         date_joined: string
@@ -114,7 +133,12 @@ class UsersApiModule(BaseApiModule):
 
     def me_create(self, json=None, **kwargs):
         """
-        Return current user
+        View users
+
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :param dict json: $ref: '#/components/schemas/User'
 
@@ -129,10 +153,68 @@ class UsersApiModule(BaseApiModule):
             **kwargs,
         )
 
+    def me_preferences_read(self, params=None, **kwargs):
+        """
+        View users
+
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
+        :param dict params: company: string
+        date_joined: string
+        email: string
+        is_active: string
+        last_login: string
+        limit: integer
+        name: string
+        offset: integer
+        ordering: string
+        roles: string
+        search: string
+
+        :returns: $ref: '#/components/schemas/UserProfile'
+
+        https://docs.huvrdata.app/reference/api_users_me_preferences_read
+        """
+        return self.client.request_json(
+            method="get",
+            path=f"/api/users/me/preferences/",
+            params=params,
+            **kwargs,
+        )
+
+    def me_preferences_partial_update(self, json=None, **kwargs):
+        """
+        View users
+
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+
+        :param dict json: $ref: '#/components/schemas/UserPreference'
+
+        :returns: $ref: '#/components/schemas/UserProfile'
+
+        https://docs.huvrdata.app/reference/api_users_me_preferences_partial_update
+        """
+        return self.client.request_json(
+            method="patch",
+            path=f"/api/users/me/preferences/",
+            json=json,
+            **kwargs,
+        )
+
     def read(self, id, **kwargs):
         """
         Return the specific user
         :params id User ID
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
 
         :returns: $ref: '#/components/schemas/User'
 
@@ -147,6 +229,11 @@ class UsersApiModule(BaseApiModule):
     def update(self, id, json=None, **kwargs):
         """
         User update
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::user_edit
 
         :param dict json: $ref: '#/components/requestBodies/UserCreate'
 
@@ -166,6 +253,11 @@ class UsersApiModule(BaseApiModule):
         View users
 
 
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::user_edit
+
         :param dict json: $ref: '#/components/requestBodies/UserCreate'
 
         :returns: $ref: '#/components/schemas/UserCreate'
@@ -182,6 +274,12 @@ class UsersApiModule(BaseApiModule):
     def delete(self, id, **kwargs):
         """
         View users
+
+
+        Required permissions:
+        - IsAuthenticated
+        - WorkspaceRequired
+        - HasRolePermissions::user_delete
 
         https://docs.huvrdata.app/reference/api_users_delete
         """
